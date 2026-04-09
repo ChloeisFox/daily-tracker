@@ -1,0 +1,10 @@
+{
+  "name": "Daily Tracker",
+  "short_name": "Daily Tracker",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8f5fd",
+  "theme_color": "#9f99d1",
+  "description": "Track weight, meals, macros, calories, and workouts.",
+  "icons": []
+}

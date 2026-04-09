@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // IMPORTANT:
+    // Because this starter uses a profile name + PIN instead of Firebase Authentication,
+    // Firestore cannot fully verify user identity. These rules are a starter rule set,
+    // not strong privacy protection.
+    // For real privacy, upgrade later to Firebase Auth and replace these rules.
+
+    match /profiles/{profileId} {
+      allow read, write: if true;
+    }
+
+    match /meals/{mealId} {
+      allow read, write: if true;
+    }
+
+    match /weights/{weightId} {
+      allow read, write: if true;
+    }
+
+    match /workouts/{workoutId} {
+      allow read, write: if true;
+    }
+  }
+}

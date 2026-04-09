@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f1fb" />
+  <title>Daily Tracker - Dashboard</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+</head>
+<body class="theme-light app-body">
+  <main class="app-shell mobile-shell">
+    <header class="page-header glass-card">
+      <div>
+        <p class="eyebrow">Good to see you</p>
+        <h1 id="greetingName">Daily Tracker</h1>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">◐</button>
+        <a class="icon-button" href="settings.html" aria-label="Settings">⚙</a>
+      </div>
+    </header>
+
+    <section id="reminderBanner" class="reminder-banner hidden"></section>
+
+    <section class="hero-card summary-hero">
+      <div>
+        <p class="eyebrow">Today</p>
+        <h2 id="todayDateLabel">--</h2>
+      </div>
+      <div class="ring-wrap">
+        <div class="progress-ring">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="48" class="ring-bg"></circle>
+            <circle cx="60" cy="60" r="48" class="ring-progress" id="calorieRing"></circle>
+          </svg>
+          <div class="ring-center">
+            <strong id="todayCalories">0</strong>
+            <span>kcal</span>
+          </div>
+        </div>
+      </div>
+      <div class="summary-stats two-col">
+        <article class="mini-stat card-soft">
+          <span>Calories left</span>
+          <strong id="caloriesLeft">0</strong>
+        </article>
+        <article class="mini-stat card-soft">
+          <span>Burned</span>
+          <strong id="caloriesBurned">0</strong>
+        </article>
+        <article class="mini-stat card-soft">
+          <span>Workout minutes</span>
+          <strong id="workoutMinutes">0</strong>
+        </article>
+        <article class="mini-stat card-soft">
+          <span>Meals today</span>
+          <strong id="mealCount">0</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="card-grid two-up">
+      <article class="panel-card pastel-green">
+        <p class="eyebrow">Weight</p>
+        <h3 id="currentWeight">--</h3>
+        <p id="weightProgressText" class="subtle">Add a weight entry to start tracking progress.</p>
+      </article>
+      <article class="panel-card pastel-blue">
+        <p class="eyebrow">Goal progress</p>
+        <h3 id="goalProgress">--</h3>
+        <p id="goalText" class="subtle">Set your goals in Settings.</p>
+      </article>
+    </section>
+
+    <section class="card-grid two-up compact-gap">
+      <a href="entry.html" class="action-card">
+        <span>Add meal</span>
+        <strong>Track food</strong>
+      </a>
+      <a href="entry.html#weight" class="action-card">
+        <span>Add weight</span>
+        <strong>Log weigh-in</strong>
+      </a>
+      <a href="entry.html#workout" class="action-card">
+        <span>Add workout</span>
+        <strong>Log movement</strong>
+      </a>
+      <a href="calendar.html" class="action-card">
+        <span>Calendar</span>
+        <strong>View dates</strong>
+      </a>
+    </section>
+
+    <section class="panel-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Quick glance</p>
+          <h2>Today at a glance</h2>
+        </div>
+        <a href="calendar.html" class="text-link">Open day</a>
+      </div>
+      <div id="todayOverview" class="stack"></div>
+    </section>
+
+    <nav class="bottom-nav glass-card">
+      <a class="nav-link active" href="dashboard.html">Home</a>
+      <a class="nav-link" href="entry.html">Entry</a>
+      <a class="nav-link" href="calendar.html">Calendar</a>
+      <a class="nav-link" href="progress.html">Progress</a>
+      <a class="nav-link" href="settings.html">Settings</a>
+    </nav>
+  </main>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

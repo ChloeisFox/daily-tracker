@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Daily Tracker - Entry</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+</head>
+<body class="theme-light app-body">
+  <main class="app-shell mobile-shell">
+    <header class="page-header glass-card">
+      <div>
+        <p class="eyebrow">Input page</p>
+        <h1>Add today or backfill a date</h1>
+      </div>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">◐</button>
+    </header>
+
+    <section class="panel-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Date</p>
+          <h2>Choose the date you want to edit</h2>
+        </div>
+      </div>
+      <input id="entryDate" type="date" />
+    </section>
+
+    <section id="meal" class="panel-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Meals</p>
+          <h2>Add meal</h2>
+        </div>
+      </div>
+      <form id="mealForm" class="stack-lg">
+        <div class="split-grid">
+          <div>
+            <label for="mealType">Meal type</label>
+            <select id="mealType">
+              <option>Breakfast</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Snack</option>
+            </select>
+          </div>
+          <div>
+            <label for="mealName">Food or title</label>
+            <input id="mealName" type="text" placeholder="Chicken salad, smoothie, taco..." />
+          </div>
+        </div>
+        <div>
+          <label for="mealCalories">Total calories</label>
+          <input id="mealCalories" type="number" min="0" step="1" placeholder="Calories for this meal" required />
+        </div>
+        <div class="split-grid three-col">
+          <div>
+            <label for="mealProtein">Protein (g)</label>
+            <input id="mealProtein" type="number" min="0" step="0.1" placeholder="Optional" />
+          </div>
+          <div>
+            <label for="mealCarbs">Carbs (g)</label>
+            <input id="mealCarbs" type="number" min="0" step="0.1" placeholder="Optional" />
+          </div>
+          <div>
+            <label for="mealFat">Fats (g)</label>
+            <input id="mealFat" type="number" min="0" step="0.1" placeholder="Optional" />
+          </div>
+        </div>
+        <div>
+          <label for="mealNotes">Notes</label>
+          <textarea id="mealNotes" rows="3" placeholder="Optional ingredients, portions, or notes"></textarea>
+        </div>
+        <button class="primary-button" type="submit">Save meal</button>
+      </form>
+    </section>
+
+    <section id="weight" class="panel-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Weight</p>
+          <h2>Add weigh-in</h2>
+        </div>
+      </div>
+      <form id="weightForm" class="stack-lg">
+        <div>
+          <label for="weightValue">Weight</label>
+          <input id="weightValue" type="number" min="0" step="0.1" placeholder="Example: 182.4" required />
+        </div>
+        <div>
+          <label for="weightNotes">Notes</label>
+          <textarea id="weightNotes" rows="2" placeholder="Optional note"></textarea>
+        </div>
+        <button class="primary-button" type="submit">Save weight</button>
+      </form>
+    </section>
+
+    <section id="workout" class="panel-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Workout</p>
+          <h2>Add workout</h2>
+        </div>
+      </div>
+      <form id="workoutForm" class="stack-lg">
+        <div class="split-grid">
+          <div>
+            <label for="workoutType">Workout type</label>
+            <input id="workoutType" type="text" placeholder="Walk, strength, yoga..." required />
+          </div>
+          <div>
+            <label for="workoutMinutesInput">Minutes</label>
+            <input id="workoutMinutesInput" type="number" min="0" step="1" placeholder="30" required />
+          </div>
+        </div>
+        <div>
+          <label for="workoutCalories">Calories burned</label>
+          <input id="workoutCalories" type="number" min="0" step="1" placeholder="Optional, but recommended" />
+        </div>
+        <div>
+          <label for="workoutNotes">Notes</label>
+          <textarea id="workoutNotes" rows="3" placeholder="Optional notes"></textarea>
+        </div>
+        <button class="primary-button" type="submit">Save workout</button>
+      </form>
+    </section>
+
+    <section class="panel-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">For this date</p>
+          <h2>Saved items</h2>
+        </div>
+      </div>
+      <div id="entrySummary" class="stack"></div>
+    </section>
+
+    <nav class="bottom-nav glass-card">
+      <a class="nav-link" href="dashboard.html">Home</a>
+      <a class="nav-link active" href="entry.html">Entry</a>
+      <a class="nav-link" href="calendar.html">Calendar</a>
+      <a class="nav-link" href="progress.html">Progress</a>
+      <a class="nav-link" href="settings.html">Settings</a>
+    </nav>
+  </main>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/entry.js"></script>
+</body>
+</html>

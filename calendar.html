@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Daily Tracker - Calendar</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+</head>
+<body class="theme-light app-body">
+  <main class="app-shell mobile-shell">
+    <header class="page-header glass-card">
+      <div>
+        <p class="eyebrow">Data glance</p>
+        <h1>Calendar overview</h1>
+      </div>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">◐</button>
+    </header>
+
+    <section class="panel-card">
+      <div class="calendar-toolbar">
+        <button id="prevMonth" class="icon-button" aria-label="Previous month">←</button>
+        <h2 id="monthLabel">Month Year</h2>
+        <button id="nextMonth" class="icon-button" aria-label="Next month">→</button>
+      </div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </section>
+
+    <section class="panel-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Selected date</p>
+          <h2 id="selectedDateTitle">Choose a day</h2>
+        </div>
+        <a id="editDateLink" href="entry.html" class="text-link">Edit day</a>
+      </div>
+      <div id="dayOverview" class="stack"></div>
+    </section>
+
+    <nav class="bottom-nav glass-card">
+      <a class="nav-link" href="dashboard.html">Home</a>
+      <a class="nav-link" href="entry.html">Entry</a>
+      <a class="nav-link active" href="calendar.html">Calendar</a>
+      <a class="nav-link" href="progress.html">Progress</a>
+      <a class="nav-link" href="settings.html">Settings</a>
+    </nav>
+  </main>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/calendar.js"></script>
+</body>
+</html>
