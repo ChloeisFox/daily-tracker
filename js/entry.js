@@ -481,9 +481,7 @@ function today() {
 }
 
 async function ensureSharedRecipesExist() {
-  const existingRecipes = await app.db.list("recipes", { profileId: "shared" });
-
-  if (existingRecipes.length > 0) return;
+  console.log("Seeding shared recipes...");
 
   for (const recipe of DEFAULT_SHARED_RECIPES) {
     await app.db.upsert("recipes", recipe.id, {
@@ -492,7 +490,7 @@ async function ensureSharedRecipesExist() {
     });
   }
 
-  console.log("Default shared recipes created from entry page.");
+  console.log("Shared recipes ready.");
 }
 
 function setDefaultDates() {
