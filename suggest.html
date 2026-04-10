@@ -8,6 +8,33 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/themes.css" />
+  <style>
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .ingredient-chip {
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.8);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .ingredient-chip.active {
+      border-color: transparent;
+      background: var(--accent, #d9c7ff);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+  </style>
 </head>
 <body class="theme-light app-body">
   <main class="app-shell mobile-shell">
@@ -16,42 +43,41 @@
         <p class="eyebrow">Meal idea</p>
         <h1>Suggest a recipe</h1>
       </div>
-      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">◐</button>
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">◐</button>
+        <a class="icon-button" href="settings.html" aria-label="Settings">⚙</a>
+      </div>
     </header>
 
     <section class="panel-card stack-lg">
       <div class="section-head">
         <div>
-          <p class="eyebrow">What do you have?</p>
-          <h2>Enter ingredients</h2>
+          <p class="eyebrow">Tap what you have</p>
+          <h2>Choose ingredients</h2>
         </div>
       </div>
 
-      <div class="stack-lg">
-        <div>
-          <label for="ingredientInput">Ingredients</label>
-          <textarea
-            id="ingredientInput"
-            rows="5"
-            placeholder="Type ingredients separated by commas or new lines&#10;Example: chicken, cheese, low carb tortilla, buffalo sauce"
-          ></textarea>
-        </div>
+      <div>
+        <label for="suggestCategory">Category</label>
+        <select id="suggestCategory">
+          <option value="">Any category</option>
+          <option>Breakfast</option>
+          <option>Lunch</option>
+          <option>Dinner</option>
+          <option>Snack</option>
+          <option>Dessert</option>
+          <option>Drink</option>
+        </select>
+      </div>
 
-        <div>
-          <label for="suggestCategory">Category</label>
-          <select id="suggestCategory">
-            <option value="">Any category</option>
-            <option>Breakfast</option>
-            <option>Lunch</option>
-            <option>Dinner</option>
-            <option>Snack</option>
-            <option>Dessert</option>
-            <option>Drink</option>
-          </select>
-        </div>
-
+      <div class="inline-actions">
+        <button id="clearIngredients" class="secondary-button" type="button">Clear selected</button>
         <button id="suggestButton" class="primary-button" type="button">Suggest recipes</button>
       </div>
+
+      <div id="selectedIngredientsText" class="helper-text">No ingredients selected yet.</div>
+
+      <div id="ingredientButtons" class="chip-grid"></div>
     </section>
 
     <section class="panel-card">
@@ -62,7 +88,7 @@
         </div>
       </div>
       <div id="suggestResults" class="stack">
-        <div class="empty-state">Add ingredients above to get recipe ideas.</div>
+        <div class="empty-state">Tap ingredients above to get recipe ideas.</div>
       </div>
     </section>
 
@@ -72,7 +98,6 @@
       <a class="nav-link" href="calendar.html">Calendar</a>
       <a class="nav-link" href="progress.html">Progress</a>
       <a class="nav-link active" href="suggest.html">Suggest</a>
-      <a class="nav-link" href="settings.html">Settings</a>
     </nav>
   </main>
 
