@@ -666,6 +666,159 @@ const DEFAULT_SHARED_RECIPES = [
     ],
     ingredientTags: ["wrap", "chicken", "sweet chili"],
     notes: "FlavorFULL version"
+  },
+    {
+    id: "cowboy-butter-bowls",
+    profileId: "shared",
+    name: "Cowboy Butter Bowls",
+    category: "Dinner",
+    calories: 288,
+    protein: 28,
+    carbs: 26,
+    fat: 9,
+    ingredients: [
+      "instant mashed potatoes",
+      "cauliflower rice",
+      "chicken",
+      "cowboy butter seasoning",
+      "butter",
+      "garlic",
+      "milk or chicken broth",
+      "light cream cheese",
+      "green vegetable"
+    ],
+    ingredientTags: ["chicken", "potato", "cowboy butter", "creamy"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "garlic-parm-stuffed-flatbread",
+    profileId: "shared",
+    name: "Garlic Parm Stuffed Flatbread",
+    category: "Lunch",
+    calories: 351,
+    protein: 38,
+    carbs: 30,
+    fat: 13,
+    ingredients: [
+      "low carb tortillas",
+      "laughing cow cheese",
+      "chicken",
+      "bacon bits",
+      "onion",
+      "parmesan garlic sauce",
+      "shredded cheese",
+      "mozzarella"
+    ],
+    ingredientTags: ["flatbread", "chicken", "garlic", "parmesan", "bacon"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "nashville-hot-loaded-fries",
+    profileId: "shared",
+    name: "Nashville Hot Loaded Fries",
+    category: "Dinner",
+    calories: 311,
+    protein: 29,
+    carbs: 36,
+    fat: 4,
+    ingredients: [
+      "russet potatoes",
+      "chicken",
+      "hot sauce",
+      "honey",
+      "shredded cheese",
+      "greek yogurt",
+      "ranch seasoning",
+      "pickles"
+    ],
+    ingredientTags: ["chicken", "fries", "spicy", "nashville"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "pizza-lunchable",
+    profileId: "shared",
+    name: "Pizza Lunchable",
+    category: "Lunch",
+    calories: 263,
+    protein: 16,
+    carbs: 31,
+    fat: 10,
+    ingredients: [
+      "mini naan or pita",
+      "mozzarella",
+      "turkey pepperoni",
+      "marinara"
+    ],
+    ingredientTags: ["pizza", "lunchable", "pepperoni"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "shredded-bbq-chicken-bowls",
+    profileId: "shared",
+    name: "Shredded BBQ Chicken Bowls",
+    category: "Dinner",
+    calories: 264,
+    protein: 28,
+    carbs: 24,
+    fat: 6,
+    ingredients: [
+      "chicken",
+      "bbq seasoning",
+      "bbq sauce",
+      "mac and cheese cups",
+      "laughing cow cheese",
+      "cottage cheese",
+      "shredded cheese",
+      "green vegetable"
+    ],
+    ingredientTags: ["chicken", "bbq", "mac and cheese"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "sweet-chili-chicken-wrap",
+    profileId: "shared",
+    name: "Sweet Chili Chicken Wrap",
+    category: "Lunch",
+    calories: 228,
+    protein: 28,
+    carbs: 20,
+    fat: 5,
+    ingredients: [
+      "low carb tortilla",
+      "light cream cheese",
+      "everything bagel seasoning",
+      "chicken",
+      "sweet chili sauce",
+      "cucumber",
+      "shredded carrots"
+    ],
+    ingredientTags: ["wrap", "chicken", "sweet chili"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "teriyaki-beef-bowl-no-rice",
+    profileId: "shared",
+    name: "Teriyaki Beef Bowl (No Rice)",
+    category: "Dinner",
+    calories: 235,
+    protein: 28,
+    carbs: 8,
+    fat: 9,
+    ingredients: [
+      "lean ground beef",
+      "garlic",
+      "pepper",
+      "ground ginger",
+      "soy sauce",
+      "teriyaki sauce",
+      "avocado",
+      "shredded carrots",
+      "cabbage mix",
+      "light yum yum sauce",
+      "wonton strips"
+    ],
+    ingredientTags: ["beef", "teriyaki", "asian", "low-carb"],
+    notes: "Rice removed from FlavorFULL teriyaki beef bowl"
   }
 ];
 
