@@ -7,23 +7,10 @@ function today() {
   return local.toISOString().slice(0, 10);
 }
 
-function getRecipeProfileIds(profileId) {
-  return [profileId, 'shared'];
-}
-
-async function getAvailableRecipes() {
-  const profile = app.getCurrentProfile();
-  const allRecipes = await app.db.list('recipes');
-
-  return allRecipes
-    .filter((recipe) => getRecipeProfileIds(profile.id).includes(recipe.profileId))
-    .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
-}
-
 function setDefaultDates() {
-  const entryDate = document.getElementById('entryDate');
-  const weightDate = document.getElementById('weightDate');
-  const workoutDate = document.getElementById('workoutDate');
+  const entryDate = document.getElementById("entryDate");
+  const weightDate = document.getElementById("weightDate");
+  const workoutDate = document.getElementById("workoutDate");
 
   if (entryDate && !entryDate.value) {
     entryDate.value = today();
@@ -36,9 +23,9 @@ function setDefaultDates() {
 }
 
 function syncFormDatesFromEntry() {
-  const selectedDate = document.getElementById('entryDate')?.value || today();
-  const weightDate = document.getElementById('weightDate');
-  const workoutDate = document.getElementById('workoutDate');
+  const selectedDate = document.getElementById("entryDate")?.value || today();
+  const weightDate = document.getElementById("weightDate");
+  const workoutDate = document.getElementById("workoutDate");
 
   if (weightDate) weightDate.value = selectedDate;
   if (workoutDate) workoutDate.value = selectedDate;
@@ -49,50 +36,53 @@ function numberValue(id) {
 }
 
 function stringValue(id) {
-  return document.getElementById(id)?.value?.trim() || '';
+  return document.getElementById(id)?.value?.trim() || "";
+}
+
+async function getSharedRecipes() {
+  const recipes = await app.db.list("recipes", { profileId: "shared" });
+
+  return recipes.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 }
 
 async function loadRecipesIntoSelect() {
-  const select = document.getElementById('savedRecipeSelect');
+  const select = document.getElementById("savedRecipeSelect");
   if (!select) return;
 
-  const recipes = await app.db.list('recipes', { profileId: 'shared' });
+  const recipes = await getSharedRecipes();
 
   select.innerHTML = `
     <option value="">Choose a saved recipe</option>
-    ${recipes
-      .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
-      .map((recipe) => `<option value="${recipe.id}">${recipe.name}</option>`)
-      .join('')}
+    ${recipes.map((recipe) => `<option value="${recipe.id}">${recipe.name}</option>`).join("")}
   `;
 }
 
 async function applySelectedRecipe() {
-  const recipeId = document.getElementById('savedRecipeSelect')?.value;
+  const recipeId = document.getElementById("savedRecipeSelect")?.value;
   if (!recipeId) return;
 
-  const recipes = await app.db.list('recipes', { profileId: 'shared' });
+  const recipes = await getSharedRecipes();
   const recipe = recipes.find((item) => item.id === recipeId);
   if (!recipe) return;
 
-  document.getElementById('mealName').value = recipe.name || '';
-  document.getElementById('mealType').value = recipe.category || 'Dinner';
-  document.getElementById('mealCalories').value = recipe.calories ?? '';
-  document.getElementById('mealProtein').value = recipe.protein ?? '';
-  document.getElementById('mealCarbs').value = recipe.carbs ?? '';
-  document.getElementById('mealFat').value = recipe.fat ?? '';
-  document.getElementById('mealNotes').value = recipe.notes || '';
+  document.getElementById("mealName").value = recipe.name || "";
+  document.getElementById("mealType").value = recipe.category || "Dinner";
+  document.getElementById("mealCalories").value = recipe.calories ?? "";
+  document.getElementById("mealProtein").value = recipe.protein ?? "";
+  document.getElementById("mealCarbs").value = recipe.carbs ?? "";
+  document.getElementById("mealFat").value = recipe.fat ?? "";
+  document.getElementById("mealNotes").value = recipe.notes || "";
 }
 
 async function loadEntrySummary() {
   const profile = app.getCurrentProfile();
-  const date = document.getElementById('entryDate')?.value || today();
-  const summary = document.getElementById('entrySummary');
+  const date = document.getElementById("entryDate")?.value || today();
+  const summary = document.getElementById("entrySummary");
 
   const [meals, weights, workouts] = await Promise.all([
-    app.db.list('meals', { profileId: profile.id, date }),
-    app.db.list('weights', { profileId: profile.id, date }),
-    app.db.list('workouts', { profileId: profile.id, date })
+    app.db.list("meals", { profileId: profile.id, date }),
+    app.db.list("weights", { profileId: profile.id, date }),
+    app.db.list("workouts", { profileId: profile.id, date })
   ]);
 
   const blocks = [];
@@ -101,7 +91,7 @@ async function loadEntrySummary() {
     blocks.push(`
       <div class="list-item">
         <strong>Weight</strong>
-        ${weights.map((item) => `<div>${item.value}</div>`).join('')}
+        ${weights.map((item) => `<div>${item.value}</div>`).join("")}
       </div>
     `);
   }
@@ -113,9 +103,9 @@ async function loadEntrySummary() {
         ${meals
           .map(
             (item) =>
-              `<div>${item.mealType}: ${item.name || 'Meal'} - ${item.calories || 0} cal</div>`
+              `<div>${item.mealType}: ${item.name || "Meal"} - ${item.calories || 0} cal</div>`
           )
-          .join('')}
+          .join("")}
       </div>
     `);
   }
@@ -127,135 +117,135 @@ async function loadEntrySummary() {
         ${workouts
           .map(
             (item) =>
-              `<div>${item.workoutType || 'Workout'} - ${item.minutes || 0} min - ${item.caloriesBurned || 0} cal</div>`
+              `<div>${item.workoutType || "Workout"} - ${item.minutes || 0} min - ${item.caloriesBurned || 0} cal</div>`
           )
-          .join('')}
+          .join("")}
       </div>
     `);
   }
 
   summary.innerHTML = blocks.length
-    ? blocks.join('')
+    ? blocks.join("")
     : `<div class="empty-state">Nothing saved for this date yet.</div>`;
 }
 
 async function installMealForm() {
-  const form = document.getElementById('mealForm');
+  const form = document.getElementById("mealForm");
   if (!form) return;
 
   await loadRecipesIntoSelect();
 
-  const recipeSelect = document.getElementById('savedRecipeSelect');
+  const recipeSelect = document.getElementById("savedRecipeSelect");
   if (recipeSelect) {
-    recipeSelect.addEventListener('change', applySelectedRecipe);
+    recipeSelect.addEventListener("change", applySelectedRecipe);
   }
 
-  form.addEventListener('submit', async (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const profile = app.getCurrentProfile();
-    const date = document.getElementById('entryDate')?.value || today();
+    const date = document.getElementById("entryDate")?.value || today();
 
     const payload = {
       id: crypto.randomUUID(),
       profileId: profile.id,
       date,
-      mealType: stringValue('mealType') || 'Dinner',
-      name: stringValue('mealName'),
-      calories: numberValue('mealCalories'),
-      protein: numberValue('mealProtein'),
-      carbs: numberValue('mealCarbs'),
-      fat: numberValue('mealFat'),
-      notes: stringValue('mealNotes'),
+      mealType: stringValue("mealType") || "Dinner",
+      name: stringValue("mealName"),
+      calories: numberValue("mealCalories"),
+      protein: numberValue("mealProtein"),
+      carbs: numberValue("mealCarbs"),
+      fat: numberValue("mealFat"),
+      notes: stringValue("mealNotes"),
       createdAt: new Date().toISOString()
     };
 
     try {
-      await app.db.create('meals', payload);
+      await app.db.create("meals", payload);
       form.reset();
-      if (recipeSelect) recipeSelect.value = '';
+      if (recipeSelect) recipeSelect.value = "";
       await loadEntrySummary();
-      alert('Meal saved.');
+      alert("Meal saved.");
     } catch (error) {
-      console.error('Failed to save meal:', error);
-      alert('Meal could not be saved.');
+      console.error("Failed to save meal:", error);
+      alert("Meal could not be saved.");
     }
   });
 }
 
 function installWeightForm() {
-  const form = document.getElementById('weightForm');
+  const form = document.getElementById("weightForm");
   if (!form) return;
 
-  form.addEventListener('submit', async (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const profile = app.getCurrentProfile();
     const date =
-      document.getElementById('weightDate')?.value ||
-      document.getElementById('entryDate')?.value ||
+      document.getElementById("weightDate")?.value ||
+      document.getElementById("entryDate")?.value ||
       today();
 
     const payload = {
       id: crypto.randomUUID(),
       profileId: profile.id,
       date,
-      value: numberValue('weightValue'),
+      value: numberValue("weightValue"),
       createdAt: new Date().toISOString()
     };
 
     try {
-      await app.db.create('weights', payload);
+      await app.db.create("weights", payload);
       form.reset();
-      const weightDate = document.getElementById('weightDate');
+      const weightDate = document.getElementById("weightDate");
       if (weightDate) {
-        weightDate.value = document.getElementById('entryDate')?.value || today();
+        weightDate.value = document.getElementById("entryDate")?.value || today();
       }
       await loadEntrySummary();
-      alert('Weight saved.');
+      alert("Weight saved.");
     } catch (error) {
-      console.error('Failed to save weight:', error);
-      alert('Weight could not be saved.');
+      console.error("Failed to save weight:", error);
+      alert("Weight could not be saved.");
     }
   });
 }
 
 function installWorkoutForm() {
-  const form = document.getElementById('workoutForm');
+  const form = document.getElementById("workoutForm");
   if (!form) return;
 
-  form.addEventListener('submit', async (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const profile = app.getCurrentProfile();
     const date =
-      document.getElementById('workoutDate')?.value ||
-      document.getElementById('entryDate')?.value ||
+      document.getElementById("workoutDate")?.value ||
+      document.getElementById("entryDate")?.value ||
       today();
 
     const payload = {
       id: crypto.randomUUID(),
       profileId: profile.id,
       date,
-      workoutType: stringValue('workoutType'),
-      minutes: numberValue('workoutMinutes'),
-      caloriesBurned: numberValue('workoutCaloriesBurned'),
-      notes: stringValue('workoutNotes'),
+      workoutType: stringValue("workoutType"),
+      minutes: numberValue("workoutMinutes"),
+      caloriesBurned: numberValue("workoutCaloriesBurned"),
+      notes: stringValue("workoutNotes"),
       createdAt: new Date().toISOString()
     };
 
     try {
-      await app.db.create('workouts', payload);
+      await app.db.create("workouts", payload);
       form.reset();
-      const workoutDate = document.getElementById('workoutDate');
+      const workoutDate = document.getElementById("workoutDate");
       if (workoutDate) {
-        workoutDate.value = document.getElementById('entryDate')?.value || today();
+        workoutDate.value = document.getElementById("entryDate")?.value || today();
       }
       await loadEntrySummary();
-      alert('Workout saved.');
+      alert("Workout saved.");
     } catch (error) {
-      console.error('Failed to save workout:', error);
-      alert('Workout could not be saved.');
+      console.error("Failed to save workout:", error);
+      alert("Workout could not be saved.");
     }
   });
 }
@@ -266,7 +256,7 @@ async function init() {
 
   setDefaultDates();
 
-  document.getElementById('entryDate')?.addEventListener('change', async () => {
+  document.getElementById("entryDate")?.addEventListener("change", async () => {
     syncFormDatesFromEntry();
     await loadEntrySummary();
   });

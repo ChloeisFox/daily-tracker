@@ -73,7 +73,7 @@ const DEFAULT_SHARED_RECIPES = [
       "ground beef",
       "refried beans",
       "queso",
-      "cheese",
+      "shredded cheese",
       "pico"
     ],
     ingredientTags: ["beef", "mexican"],
@@ -93,9 +93,9 @@ const DEFAULT_SHARED_RECIPES = [
       "pasta",
       "alfredo sauce",
       "broccoli",
-      "cheese"
+      "shredded cheese"
     ],
-    ingredientTags: ["chicken", "pasta"],
+    ingredientTags: ["chicken", "pasta", "alfredo"],
     notes: ""
   },
   {
@@ -112,7 +112,7 @@ const DEFAULT_SHARED_RECIPES = [
       "black beans",
       "enchilada sauce",
       "queso",
-      "cheese"
+      "shredded cheese"
     ],
     ingredientTags: ["chicken", "mexican"],
     notes: "Rice removed"
@@ -122,19 +122,20 @@ const DEFAULT_SHARED_RECIPES = [
     profileId: "shared",
     name: "Chicken Parm Bowl",
     category: "Dinner",
-    calories: 364,
-    protein: 32,
-    carbs: 38,
-    fat: 6,
+    calories: 388,
+    protein: 42,
+    carbs: 37,
+    fat: 8,
     ingredients: [
       "chicken",
-      "pasta",
+      "protein pasta",
+      "cottage cheese",
       "marinara",
-      "cheese",
-      "broccoli"
+      "parmesan",
+      "mozzarella"
     ],
-    ingredientTags: ["chicken", "pasta"],
-    notes: ""
+    ingredientTags: ["chicken", "pasta", "marinara", "cheese"],
+    notes: "FlavorFULL version"
   },
   {
     id: "chicken-teriyaki-bowl",
@@ -150,8 +151,29 @@ const DEFAULT_SHARED_RECIPES = [
       "broccoli",
       "teriyaki sauce"
     ],
-    ingredientTags: ["chicken", "asian"],
+    ingredientTags: ["chicken", "asian", "teriyaki"],
     notes: "Rice removed"
+  },
+  {
+    id: "creamy-lemon-chicken",
+    profileId: "shared",
+    name: "Creamy Lemon Chicken",
+    category: "Dinner",
+    calories: 368,
+    protein: 32,
+    carbs: 26,
+    fat: 15,
+    ingredients: [
+      "instant mashed potatoes",
+      "cauliflower rice",
+      "chicken",
+      "alfredo sauce",
+      "bone broth",
+      "mozzarella",
+      "lemon"
+    ],
+    ingredientTags: ["chicken", "lemon", "creamy"],
+    notes: "FlavorFULL version"
   },
   {
     id: "egg-roll-bowl",
@@ -169,7 +191,7 @@ const DEFAULT_SHARED_RECIPES = [
       "soy sauce",
       "teriyaki sauce"
     ],
-    ingredientTags: ["beef", "low-carb"],
+    ingredientTags: ["beef", "cabbage", "low-carb"],
     notes: "Rice removed"
   },
   {
@@ -187,7 +209,7 @@ const DEFAULT_SHARED_RECIPES = [
       "onion",
       "queso"
     ],
-    ingredientTags: ["chicken", "mexican"],
+    ingredientTags: ["chicken", "mexican", "peppers"],
     notes: "Rice removed"
   },
   {
@@ -203,9 +225,11 @@ const DEFAULT_SHARED_RECIPES = [
       "pasta",
       "ground beef",
       "marinara",
-      "cheese"
+      "greek yogurt",
+      "mozzarella",
+      "parmesan"
     ],
-    ingredientTags: ["pasta", "beef"],
+    ingredientTags: ["pasta", "beef", "cheese"],
     notes: ""
   },
   {
@@ -223,26 +247,71 @@ const DEFAULT_SHARED_RECIPES = [
       "teriyaki sauce",
       "peanut sauce"
     ],
-    ingredientTags: ["low-carb", "chicken"],
+    ingredientTags: ["chicken", "lettuce", "low-carb"],
     notes: ""
+  },
+  {
+    id: "loaded-chicken-casserole",
+    profileId: "shared",
+    name: "Loaded Chicken Casserole",
+    category: "Dinner",
+    calories: 177,
+    protein: 10,
+    carbs: 7,
+    fat: 12,
+    ingredients: [
+      "cream cheese",
+      "plain greek yogurt",
+      "cream of chicken soup",
+      "ranch seasoning",
+      "shredded cheese",
+      "bacon bits",
+      "shredded chicken",
+      "ritz crackers",
+      "butter"
+    ],
+    ingredientTags: ["chicken", "casserole", "cheese", "bacon"],
+    notes: "Heat + Eat version; served without rice"
+  },
+  {
+    id: "marry-me-pasta-salad-bowl",
+    profileId: "shared",
+    name: "Marry Me Pasta Salad Bowl",
+    category: "Dinner",
+    calories: 298,
+    protein: 29,
+    carbs: 28,
+    fat: 7,
+    ingredients: [
+      "cooked pasta",
+      "chicken",
+      "sun dried tomatoes",
+      "parmesan",
+      "spinach",
+      "alfredo sauce",
+      "sun dried tomato pesto"
+    ],
+    ingredientTags: ["chicken", "pasta", "alfredo"],
+    notes: "FlavorFULL version"
   },
   {
     id: "mcchicken-sandwich",
     profileId: "shared",
     name: "McChicken Sandwich",
     category: "Lunch",
-    calories: 450,
-    protein: 30,
-    carbs: 40,
-    fat: 18,
+    calories: 225,
+    protein: 13,
+    carbs: 22,
+    fat: 7,
     ingredients: [
-      "low calorie bun",
-      "crispy chicken",
-      "lettuce",
-      "mayo"
+      "frozen chicken patty",
+      "low carb bread or bun",
+      "light mayo",
+      "shredded lettuce",
+      "pickles"
     ],
     ingredientTags: ["chicken", "sandwich"],
-    notes: ""
+    notes: "Heat + Eat version"
   },
   {
     id: "mcchicken-wrap",
@@ -263,6 +332,27 @@ const DEFAULT_SHARED_RECIPES = [
     notes: ""
   },
   {
+    id: "microwave-loaded-hb-casserole",
+    profileId: "shared",
+    name: "Microwave Loaded HB Casserole",
+    category: "Dinner",
+    calories: 361,
+    protein: 42,
+    carbs: 25,
+    fat: 10,
+    ingredients: [
+      "shredded hashbrowns",
+      "chicken",
+      "cottage cheese",
+      "laughing cow cheese",
+      "ranch seasoning",
+      "shredded cheese",
+      "bacon bits"
+    ],
+    ingredientTags: ["chicken", "potato", "casserole", "bacon"],
+    notes: "FlavorFULL version"
+  },
+  {
     id: "million-dollar-pasta",
     profileId: "shared",
     name: "Million Dollar Pasta",
@@ -277,7 +367,7 @@ const DEFAULT_SHARED_RECIPES = [
       "cheese",
       "sauce"
     ],
-    ingredientTags: ["pasta", "beef"],
+    ingredientTags: ["pasta", "beef", "cheese"],
     notes: ""
   },
   {
@@ -295,8 +385,91 @@ const DEFAULT_SHARED_RECIPES = [
       "pesto",
       "cheese"
     ],
-    ingredientTags: ["tortilla", "chicken"],
+    ingredientTags: ["tortilla", "chicken", "pesto"],
     notes: ""
+  },
+  {
+    id: "sausage-rigatoni-bowls",
+    profileId: "shared",
+    name: "Sausage Rigatoni Bowls",
+    category: "Dinner",
+    calories: 362,
+    protein: 31,
+    carbs: 29,
+    fat: 14,
+    ingredients: [
+      "dry pasta",
+      "lean italian sausage or beef",
+      "marinara or vodka sauce",
+      "cottage cheese",
+      "parmesan",
+      "mozzarella",
+      "green vegetable"
+    ],
+    ingredientTags: ["pasta", "sausage", "beef", "cheese"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "street-corn-queso-bowl",
+    profileId: "shared",
+    name: "Street Corn Queso Bowl",
+    category: "Lunch",
+    calories: 289,
+    protein: 42,
+    carbs: 14,
+    fat: 8,
+    ingredients: [
+      "chicken",
+      "fire roasted corn",
+      "laughing cow cheese",
+      "cottage cheese or greek yogurt",
+      "fajita seasoning",
+      "shredded cheese"
+    ],
+    ingredientTags: ["chicken", "corn", "queso"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "white-chicken-enchilada-casserole-bowl",
+    profileId: "shared",
+    name: "White Chicken Enchilada Casserole Bowl",
+    category: "Dinner",
+    calories: 287,
+    protein: 37,
+    carbs: 4,
+    fat: 12,
+    ingredients: [
+      "salsa verde",
+      "zero net carb mini tortillas",
+      "chicken",
+      "shredded cheese",
+      "greek yogurt",
+      "fajita seasoning",
+      "queso"
+    ],
+    ingredientTags: ["chicken", "enchilada", "queso"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "wicked-chicken-wrap",
+    profileId: "shared",
+    name: "Wicked Chicken Wrap",
+    category: "Lunch",
+    calories: 244,
+    protein: 24,
+    carbs: 36,
+    fat: 6,
+    ingredients: [
+      "low carb tortilla",
+      "chicken",
+      "hot sauce",
+      "honey",
+      "ranch seasoning",
+      "shredded lettuce",
+      "diced pickles"
+    ],
+    ingredientTags: ["wrap", "chicken", "spicy"],
+    notes: "FlavorFULL version"
   }
 ];
 
@@ -312,55 +485,50 @@ function getIngredientsArray(text) {
 }
 
 function normalizeIngredientTags(ingredients) {
-  return [...new Set(
-    (ingredients || [])
-      .flatMap((line) =>
-        String(line)
-          .toLowerCase()
-          .replace(/[^a-z0-9\s-]/g, ' ')
-          .split(/\s+/)
-      )
-      .map((word) => word.trim())
-      .filter((word) => word.length > 2)
-  )];
+  return [
+    ...new Set(
+      (ingredients || [])
+        .flatMap((line) =>
+          String(line)
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, ' ')
+            .split(/\s+/)
+        )
+        .map((word) => word.trim())
+        .filter((word) => word.length > 2)
+    )
+  ];
 }
 
-async function ensureDefaultSharedRecipes() {
-  const existingRecipes = await app.db.list(recipeCollectionName(), { profileId: 'shared' });
-
-  if (existingRecipes.length > 0) {
-    return;
-  }
-
+async function upsertDefaultSharedRecipes() {
   for (const recipe of DEFAULT_SHARED_RECIPES) {
     await app.db.upsert(recipeCollectionName(), recipe.id, {
       ...recipe,
-      createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     });
   }
 
-  console.log('Default shared recipes imported to Firestore.');
+  console.log("Default shared recipes upserted.");
 }
 
 function fillRecipeForm(recipe) {
-  document.getElementById('recipeId').value = recipe.id || '';
-  document.getElementById('recipeName').value = recipe.name || '';
-  document.getElementById('recipeCategory').value = recipe.category || '';
-  document.getElementById('recipeServingSize').value = recipe.servingSize || '';
-  document.getElementById('recipeCalories').value = recipe.calories ?? '';
-  document.getElementById('recipeProtein').value = recipe.protein ?? '';
-  document.getElementById('recipeCarbs').value = recipe.carbs ?? '';
-  document.getElementById('recipeFat').value = recipe.fat ?? '';
-  document.getElementById('recipeIngredients').value = Array.isArray(recipe.ingredients)
-    ? recipe.ingredients.join('\n')
-    : '';
-  document.getElementById('recipeNotes').value = recipe.notes || '';
+  document.getElementById("recipeId").value = recipe.id || "";
+  document.getElementById("recipeName").value = recipe.name || "";
+  document.getElementById("recipeCategory").value = recipe.category || "";
+  document.getElementById("recipeServingSize").value = recipe.servingSize || "";
+  document.getElementById("recipeCalories").value = recipe.calories ?? "";
+  document.getElementById("recipeProtein").value = recipe.protein ?? "";
+  document.getElementById("recipeCarbs").value = recipe.carbs ?? "";
+  document.getElementById("recipeFat").value = recipe.fat ?? "";
+  document.getElementById("recipeIngredients").value = Array.isArray(recipe.ingredients)
+    ? recipe.ingredients.join("\n")
+    : "";
+  document.getElementById("recipeNotes").value = recipe.notes || "";
 }
 
 function clearRecipeForm() {
-  document.getElementById('recipeForm').reset();
-  document.getElementById('recipeId').value = '';
+  document.getElementById("recipeForm").reset();
+  document.getElementById("recipeId").value = "";
 }
 
 function recipeCard(recipe) {
@@ -369,27 +537,32 @@ function recipeCard(recipe) {
     recipe.protein ? `P ${recipe.protein}` : null,
     recipe.carbs ? `C ${recipe.carbs}` : null,
     recipe.fat ? `F ${recipe.fat}` : null
-  ].filter(Boolean).join(' • ');
+  ]
+    .filter(Boolean)
+    .join(" • ");
 
-  const ingredientsPreview = Array.isArray(recipe.ingredients) && recipe.ingredients.length
-    ? `<p class="helper-text">${recipe.ingredients.slice(0, 3).join(' • ')}${recipe.ingredients.length > 3 ? '...' : ''}</p>`
-    : '';
+  const ingredientsPreview =
+    Array.isArray(recipe.ingredients) && recipe.ingredients.length
+      ? `<p class="helper-text">${recipe.ingredients.slice(0, 3).join(" • ")}${
+          recipe.ingredients.length > 3 ? "..." : ""
+        }</p>`
+      : "";
 
   return `
     <div class="list-item">
       <div class="summary-row">
         <div>
-          <strong>${recipe.name || 'Untitled Recipe'}</strong>
+          <strong>${recipe.name || "Untitled Recipe"}</strong>
           <div class="helper-text">
-            ${recipe.category || 'No category'}${recipe.servingSize ? ` • ${recipe.servingSize}` : ''}
+            ${recipe.category || "No category"}${recipe.servingSize ? ` • ${recipe.servingSize}` : ""}
           </div>
         </div>
         <span class="status-pill">Shared</span>
       </div>
 
-      ${macros ? `<p class="helper-text" style="margin-top:8px;">${macros}</p>` : ''}
+      ${macros ? `<p class="helper-text" style="margin-top:8px;">${macros}</p>` : ""}
       ${ingredientsPreview}
-      ${recipe.notes ? `<p class="helper-text" style="margin-top:8px;">${recipe.notes}</p>` : ''}
+      ${recipe.notes ? `<p class="helper-text" style="margin-top:8px;">${recipe.notes}</p>` : ""}
 
       <div class="inline-actions" style="margin-top:12px;">
         <button type="button" class="edit-recipe-button" data-id="${recipe.id}">Edit</button>
@@ -403,13 +576,13 @@ async function getSharedRecipes() {
   const allRecipes = await app.db.list(recipeCollectionName());
 
   return allRecipes
-    .filter((recipe) => recipe.profileId === 'shared')
-    .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    .filter((recipe) => recipe.profileId === "shared")
+    .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 }
 
 async function loadRecipes() {
-  const search = document.getElementById('recipeSearch')?.value.trim().toLowerCase() || '';
-  const category = document.getElementById('recipeFilterCategory')?.value || '';
+  const search = document.getElementById("recipeSearch")?.value.trim().toLowerCase() || "";
+  const category = document.getElementById("recipeFilterCategory")?.value || "";
 
   let recipes = await getSharedRecipes();
 
@@ -428,14 +601,14 @@ async function loadRecipes() {
         ...(Array.isArray(recipe.ingredientTags) ? recipe.ingredientTags : [])
       ]
         .filter(Boolean)
-        .join(' ')
+        .join(" ")
         .toLowerCase();
 
       return haystack.includes(search);
     });
   }
 
-  const recipeList = document.getElementById('recipeList');
+  const recipeList = document.getElementById("recipeList");
   if (!recipeList) return;
 
   if (!recipes.length) {
@@ -443,19 +616,19 @@ async function loadRecipes() {
     return;
   }
 
-  recipeList.innerHTML = recipes.map(recipeCard).join('');
+  recipeList.innerHTML = recipes.map(recipeCard).join("");
 
-  recipeList.querySelectorAll('.edit-recipe-button').forEach((button) => {
-    button.addEventListener('click', async () => {
+  recipeList.querySelectorAll(".edit-recipe-button").forEach((button) => {
+    button.addEventListener("click", () => {
       const selected = recipes.find((recipe) => recipe.id === button.dataset.id);
       if (!selected) return;
       fillRecipeForm(selected);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 
-  recipeList.querySelectorAll('.delete-recipe-button').forEach((button) => {
-    button.addEventListener('click', async () => {
+  recipeList.querySelectorAll(".delete-recipe-button").forEach((button) => {
+    button.addEventListener("click", async () => {
       const selected = recipes.find((recipe) => recipe.id === button.dataset.id);
       if (!selected) return;
 
@@ -469,28 +642,28 @@ async function loadRecipes() {
 }
 
 function installRecipeForm() {
-  const form = document.getElementById('recipeForm');
+  const form = document.getElementById("recipeForm");
   if (!form) return;
 
-  form.addEventListener('submit', async (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const existingId = document.getElementById('recipeId').value.trim();
-    const ingredients = getIngredientsArray(document.getElementById('recipeIngredients').value);
+    const existingId = document.getElementById("recipeId").value.trim();
+    const ingredients = getIngredientsArray(document.getElementById("recipeIngredients").value);
 
     const payload = {
       id: existingId || crypto.randomUUID(),
-      profileId: 'shared',
-      name: document.getElementById('recipeName').value.trim(),
-      category: document.getElementById('recipeCategory').value,
-      servingSize: document.getElementById('recipeServingSize').value.trim() || '1 serving',
-      calories: Number(document.getElementById('recipeCalories').value || 0),
-      protein: Number(document.getElementById('recipeProtein').value || 0),
-      carbs: Number(document.getElementById('recipeCarbs').value || 0),
-      fat: Number(document.getElementById('recipeFat').value || 0),
+      profileId: "shared",
+      name: document.getElementById("recipeName").value.trim(),
+      category: document.getElementById("recipeCategory").value,
+      servingSize: document.getElementById("recipeServingSize").value.trim() || "1 serving",
+      calories: Number(document.getElementById("recipeCalories").value || 0),
+      protein: Number(document.getElementById("recipeProtein").value || 0),
+      carbs: Number(document.getElementById("recipeCarbs").value || 0),
+      fat: Number(document.getElementById("recipeFat").value || 0),
       ingredients,
       ingredientTags: normalizeIngredientTags(ingredients),
-      notes: document.getElementById('recipeNotes').value.trim(),
+      notes: document.getElementById("recipeNotes").value.trim(),
       updatedAt: new Date().toISOString()
     };
 
@@ -502,25 +675,25 @@ function installRecipeForm() {
       await app.db.upsert(recipeCollectionName(), payload.id, payload);
       clearRecipeForm();
       await loadRecipes();
-      alert(existingId ? 'Recipe updated.' : 'Recipe saved for both profiles.');
+      alert(existingId ? "Recipe updated." : "Recipe saved for both profiles.");
     } catch (error) {
-      console.error('Recipe save failed:', error);
+      console.error("Recipe save failed:", error);
       alert(`Recipe save failed: ${error.message || error}`);
     }
   });
 
-  document.getElementById('clearRecipeForm')?.addEventListener('click', clearRecipeForm);
+  document.getElementById("clearRecipeForm")?.addEventListener("click", clearRecipeForm);
 }
 
 function installFilters() {
-  document.getElementById('recipeSearch')?.addEventListener('input', loadRecipes);
-  document.getElementById('recipeFilterCategory')?.addEventListener('change', loadRecipes);
+  document.getElementById("recipeSearch")?.addEventListener("input", loadRecipes);
+  document.getElementById("recipeFilterCategory")?.addEventListener("change", loadRecipes);
 }
 
 async function init() {
   await app.ensureApp();
   app.requireProfile();
-  await ensureDefaultSharedRecipes();
+  await upsertDefaultSharedRecipes();
   installRecipeForm();
   installFilters();
   await loadRecipes();
