@@ -1,224 +1,28 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    function isIsoDate(value) {
-      return value is string &&
-        value.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
-    }
-
-    function isOptionalString(value) {
-      return value == null || value is string;
-    }
-
-    function isOptionalNumber(value) {
-      return value == null || value is int || value is float || value is string;
-    }
-
-    function isOptionalBool(value) {
-      return value == null || value is bool;
-    }
-
-    function validProfileId(value) {
-      return value is string && value.size() > 0 && value.size() <= 50;
-    }
-
-    function validProfileName(value) {
-      return value is string && value.size() > 0 && value.size() <= 50;
-    }
-
-    function validPin(value) {
-      return value is string && value.matches('^[0-9]{4}$');
-    }
-
-    function validGoals(goals) {
-      return goals == null || (
-        goals is map &&
-        goals.keys().hasOnly([
-          "startWeight",
-          "goalWeight",
-          "calorieTarget",
-          "proteinTarget",
-          "weighInDays"
-        ]) &&
-        (!("startWeight" in goals) || isOptionalNumber(goals.startWeight) || goals.startWeight == "") &&
-        (!("goalWeight" in goals) || isOptionalNumber(goals.goalWeight) || goals.goalWeight == "") &&
-        (!("calorieTarget" in goals) || isOptionalNumber(goals.calorieTarget)) &&
-        (!("proteinTarget" in goals) || isOptionalNumber(goals.proteinTarget)) &&
-        (!("weighInDays" in goals) || isOptionalNumber(goals.weighInDays))
-      );
-    }
-
-    function validProfile() {
-      return request.resource.data.keys().hasOnly([
-        "id",
-        "name",
-        "pin",
-        "createdAt",
-        "theme",
-        "goals"
-      ]) &&
-      validProfileId(request.resource.data.id) &&
-      validProfileName(request.resource.data.name) &&
-      validPin(request.resource.data.pin) &&
-      isOptionalString(request.resource.data.createdAt) &&
-      (!("theme" in request.resource.data) ||
-        request.resource.data.theme in ["light", "dark"]) &&
-      validGoals(request.resource.data.goals);
-    }
-
-    function validMealType(value) {
-      return value == null || value in ["Breakfast", "Lunch", "Dinner", "Snack"];
-    }
-
-    function validMeal() {
-      return request.resource.data.keys().hasOnly([
-        "id",
-        "profileId",
-        "date",
-        "mealType",
-        "name",
-        "calories",
-        "protein",
-        "carbs",
-        "fat",
-        "notes",
-        "createdAt"
-      ]) &&
-      validProfileId(request.resource.data.profileId) &&
-      isIsoDate(request.resource.data.date) &&
-      validMealType(request.resource.data.mealType) &&
-      isOptionalString(request.resource.data.name) &&
-      isOptionalNumber(request.resource.data.calories) &&
-      isOptionalNumber(request.resource.data.protein) &&
-      isOptionalNumber(request.resource.data.carbs) &&
-      isOptionalNumber(request.resource.data.fat) &&
-      isOptionalString(request.resource.data.notes) &&
-      isOptionalString(request.resource.data.createdAt);
-    }
-
-    function validWeight() {
-      return request.resource.data.keys().hasOnly([
-        "id",
-        "profileId",
-        "date",
-        "value",
-        "createdAt"
-      ]) &&
-      validProfileId(request.resource.data.profileId) &&
-      isIsoDate(request.resource.data.date) &&
-      isOptionalNumber(request.resource.data.value) &&
-      isOptionalString(request.resource.data.createdAt);
-    }
-
-    function validWorkout() {
-      return request.resource.data.keys().hasOnly([
-        "id",
-        "profileId",
-        "date",
-        "workoutType",
-        "minutes",
-        "caloriesBurned",
-        "notes",
-        "createdAt"
-      ]) &&
-      validProfileId(request.resource.data.profileId) &&
-      isIsoDate(request.resource.data.date) &&
-      isOptionalString(request.resource.data.workoutType) &&
-      isOptionalNumber(request.resource.data.minutes) &&
-      isOptionalNumber(request.resource.data.caloriesBurned) &&
-      isOptionalString(request.resource.data.notes) &&
-      isOptionalString(request.resource.data.createdAt);
-    }
-
-    function validSettings() {
-      return request.resource.data.keys().hasOnly([
-        "id",
-        "profileId",
-        "goals",
-        "notificationsEnabled",
-        "darkMode",
-        "updatedAt"
-      ]) &&
-      validProfileId(request.resource.data.profileId) &&
-      validGoals(request.resource.data.goals) &&
-      (!("notificationsEnabled" in request.resource.data) ||
-        isOptionalBool(request.resource.data.notificationsEnabled)) &&
-      (!("darkMode" in request.resource.data) ||
-        isOptionalBool(request.resource.data.darkMode)) &&
-      isOptionalString(request.resource.data.updatedAt);
-    }
-
-    function validRecipe() {
-      return request.resource.data.keys().hasOnly([
-        "id",
-        "profileId",
-        "name",
-        "category",
-        "servingSize",
-        "calories",
-        "protein",
-        "carbs",
-        "fat",
-        "ingredients",
-        "ingredientTags",
-        "notes",
-        "createdAt",
-        "updatedAt"
-      ]) &&
-      validProfileId(request.resource.data.profileId) &&
-      isOptionalString(request.resource.data.name) &&
-      isOptionalString(request.resource.data.category) &&
-      isOptionalString(request.resource.data.servingSize) &&
-      isOptionalNumber(request.resource.data.calories) &&
-      isOptionalNumber(request.resource.data.protein) &&
-      isOptionalNumber(request.resource.data.carbs) &&
-      isOptionalNumber(request.resource.data.fat) &&
-      (!("ingredients" in request.resource.data) || request.resource.data.ingredients is list) &&
-      (!("ingredientTags" in request.resource.data) || request.resource.data.ingredientTags is list) &&
-      isOptionalString(request.resource.data.notes) &&
-      isOptionalString(request.resource.data.createdAt) &&
-      isOptionalString(request.resource.data.updatedAt);
-    }
-
     match /profiles/{docId} {
-      allow read: if true;
-      allow create, update: if validProfile();
-      allow delete: if false;
+      allow read, write: if true;
     }
 
     match /meals/{docId} {
-      allow read: if true;
-      allow create, update: if validMeal();
-      allow delete: if true;
+      allow read, write: if true;
     }
 
     match /weights/{docId} {
-      allow read: if true;
-      allow create, update: if validWeight();
-      allow delete: if true;
+      allow read, write: if true;
     }
 
     match /workouts/{docId} {
-      allow read: if true;
-      allow create, update: if validWorkout();
-      allow delete: if true;
+      allow read, write: if true;
     }
 
     match /settings/{docId} {
-      allow read: if true;
-      allow create, update: if validSettings();
-      allow delete: if false;
+      allow read, write: if true;
     }
 
     match /recipes/{docId} {
-      allow read: if true;
-      allow create, update: if validRecipe();
-      allow delete: if true;
-    }
-
-    match /{document=**} {
-      allow read, write: if false;
+      allow read, write: if true;
     }
   }
 }
