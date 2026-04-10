@@ -1,5 +1,47 @@
 const app = window.dailyTracker;
+const COOKBOOK_BY_RECIPE_ID = {
+  "bbq-bacon-cheeseburger-bowls": "FlavorFULL",
+  "beef-enchilada-bowl": "Heat + Eat",
+  "big-mac-bowl": "Heat + Eat",
+  "buffalo-chicken-quesadilla": "Heat + Eat",
+  "cali-club-wrap": "FlavorFULL",
+  "chicken-alfredo-bowl": "Heat + Eat",
+  "chicken-enchilada-bowl": "Heat + Eat",
+  "chicken-parm-bowl": "Heat + Eat",
+  "chicken-teriyaki-bowl": "Heat + Eat",
+  "chili-mac-bowls": "FlavorFULL",
+  "cowboy-butter-bowls": "FlavorFULL",
+  "crispy-chipotle-chicken-wrap": "FlavorFULL",
+  "egg-roll-bowl": "Heat + Eat",
+  "fajita-bowl": "Heat + Eat",
+  "french-dip-crunchers": "FlavorFULL",
+  "jerk-chicken-wrap": "FlavorFULL",
+  "lasagna-bowl": "Heat + Eat",
+  "loaded-chicken-casserole": "Heat + Eat",
+  "marry-me-pasta-salad-bowl": "FlavorFULL",
+  "mcchicken-mac-wrap": "FlavorFULL",
+  "mcchicken-sandwich": "Heat + Eat",
+  "mcchicken-wrap": "Heat + Eat",
+  "microwave-loaded-hb-casserole": "FlavorFULL",
+  "million-dollar-pasta": "Heat + Eat",
+  "nashville-hot-loaded-fries": "FlavorFULL",
+  "orange-chicken-bowls": "FlavorFULL",
+  "pizza-lunchable": "FlavorFULL",
+  "pesto-quesadilla": "Heat + Eat",
+  "sausage-rigatoni-bowls": "FlavorFULL",
+  "shredded-bbq-chicken-bowls": "FlavorFULL",
+  "southwestern-pinwheels": "FlavorFULL",
+  "street-corn-queso-bowl": "FlavorFULL",
+  "sweet-chili-chicken-wrap": "FlavorFULL",
+  "teriyaki-beef-bowl-no-rice": "FlavorFULL",
+  "white-chicken-enchilada-casserole-bowl": "FlavorFULL",
+  "wicked-chicken-wrap": "FlavorFULL"
+};
 
+function getCookbookNote(recipe) {
+  const cookbook = COOKBOOK_BY_RECIPE_ID[recipe.id];
+  return cookbook ? `Cookbook: ${cookbook}` : "";
+}
 let selectedIngredients = new Set();
 
 function normalizeWord(value) {
