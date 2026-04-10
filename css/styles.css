@@ -193,3 +193,23 @@ body.theme-dark .empty-state,
 body.theme-dark .inline-actions button {
   color: var(--text);
 }
+
+.calendar-cell.is-under-goal {
+  background: linear-gradient(180deg, rgba(216, 239, 185, 0.85), rgba(255, 255, 255, 0.9));
+  border: 1px solid rgba(117, 181, 107, 0.45);
+}
+
+.calendar-cell.is-over-goal {
+  background: linear-gradient(180deg, rgba(241, 121, 159, 0.22), rgba(255, 255, 255, 0.9));
+  border: 1px solid rgba(207, 107, 143, 0.45);
+}
+
+body.theme-dark .calendar-cell.is-under-goal {
+  background: linear-gradient(180deg, rgba(62, 93, 50, 0.95), rgba(19, 13, 26, 0.95));
+  border: 1px solid rgba(142, 210, 106, 0.35);
+}
+
+body.theme-dark .calendar-cell.is-over-goal {
+  background: linear-gradient(180deg, rgba(90, 28, 49, 0.95), rgba(19, 13, 26, 0.95));
+  border: 1px solid rgba(241, 121, 159, 0.35);
+}
