@@ -1,8 +1,95 @@
 const app = window.dailyTracker;
+
+let selectedIngredients = new Set();
+
+const INGREDIENT_GROUPS = {
+  Proteins: [
+    "chicken",
+    "ground beef",
+    "turkey",
+    "bacon",
+    "pepperoni",
+    "egg"
+  ],
+  Carbs: [
+    "pasta",
+    "tortilla",
+    "bread",
+    "potatoes",
+    "beans",
+    "corn"
+  ],
+  Sauces: [
+    "alfredo",
+    "bbq",
+    "buffalo",
+    "chipotle sauce",
+    "enchilada sauce",
+    "marinara",
+    "orange sauce",
+    "pesto",
+    "queso",
+    "ranch dressing",
+    "ranch seasoning",
+    "soy sauce",
+    "sweet chili sauce",
+    "teriyaki sauce",
+    "tzatziki sauce"
+  ],
+  Dairy: [
+    "cheese",
+    "cream cheese",
+    "greek yogurt",
+    "butter"
+  ],
+  Vegetables: [
+    "avocado",
+    "banana peppers",
+    "broccoli",
+    "cabbage",
+    "carrots",
+    "cherry tomatoes",
+    "cilantro",
+    "cucumber",
+    "fire roasted corn",
+    "garlic",
+    "lettuce",
+    "lime",
+    "mushrooms",
+    "onion",
+    "peppers",
+    "pico",
+    "pickles",
+    "pineapple",
+    "spinach",
+    "sun dried tomatoes",
+    "tomato",
+    "vegetables"
+  ],
+  SeasoningsAndExtras: [
+    "chili seasoning",
+    "fajita seasoning",
+    "honey",
+    "italian dressing",
+    "jerk seasoning",
+    "light italian dressing",
+    "light mayo",
+    "mayo",
+    "peanut butter",
+    "refried beans",
+    "spinach dip",
+    "sriracha",
+    "taco seasoning"
+  ]
+};
+
 const COOKBOOK_BY_RECIPE_ID = {
   "bbq-bacon-cheeseburger-bowls": "FlavorFULL",
+  "bbq-chicken-pasta-salad": "FlavorFULL",
   "beef-enchilada-bowl": "Heat + Eat",
   "big-mac-bowl": "Heat + Eat",
+  "blt-pasta-salad": "FlavorFULL",
+  "buffalo-chicken-pasta-salad": "FlavorFULL",
   "buffalo-chicken-quesadilla": "Heat + Eat",
   "cali-club-wrap": "FlavorFULL",
   "chicken-alfredo-bowl": "Heat + Eat",
@@ -10,39 +97,47 @@ const COOKBOOK_BY_RECIPE_ID = {
   "chicken-parm-bowl": "Heat + Eat",
   "chicken-teriyaki-bowl": "Heat + Eat",
   "chili-mac-bowls": "FlavorFULL",
+  "chopped-chicken-bacon-ranch-bowl": "FlavorFULL",
+  "chopped-greek": "FlavorFULL",
+  "chopped-italian-beef-bowl": "FlavorFULL",
+  "club-sliders": "FlavorFULL",
+  "cool-ranch-chicken-casserole": "FlavorFULL",
   "cowboy-butter-bowls": "FlavorFULL",
+  "creamy-chicken-spinach-bake": "FlavorFULL",
   "crispy-chipotle-chicken-wrap": "FlavorFULL",
+  "crunchwrap-sliders": "FlavorFULL",
+  "cobb-chicken-wrap": "FlavorFULL",
   "egg-roll-bowl": "Heat + Eat",
   "fajita-bowl": "Heat + Eat",
   "french-dip-crunchers": "FlavorFULL",
+  "garlic-bread-pizza-burgers": "FlavorFULL",
+  "garlic-parm-sliders": "FlavorFULL",
+  "grinder-de-gallo": "FlavorFULL",
+  "honey-butter-chicken": "FlavorFULL",
   "jerk-chicken-wrap": "FlavorFULL",
   "lasagna-bowl": "Heat + Eat",
-  "loaded-chicken-casserole": "Heat + Eat",
+  "lettuce-wrap-bowl": "Heat + Eat",
+  "loaded-alfredo-fries": "FlavorFULL",
   "marry-me-pasta-salad-bowl": "FlavorFULL",
-  "mcchicken-mac-wrap": "FlavorFULL",
   "mcchicken-sandwich": "Heat + Eat",
   "mcchicken-wrap": "Heat + Eat",
-  "microwave-loaded-hb-casserole": "FlavorFULL",
+  "mexi-cali-wrap": "FlavorFULL",
   "million-dollar-pasta": "Heat + Eat",
-  "nashville-hot-loaded-fries": "FlavorFULL",
   "orange-chicken-bowls": "FlavorFULL",
+  "philly-cheese-casserole": "FlavorFULL",
+  "philly-cheese-sliders": "FlavorFULL",
   "pizza-lunchable": "FlavorFULL",
+  "pizza-sub-wrap": "FlavorFULL",
   "pesto-quesadilla": "Heat + Eat",
-  "sausage-rigatoni-bowls": "FlavorFULL",
-  "shredded-bbq-chicken-bowls": "FlavorFULL",
-  "southwestern-pinwheels": "FlavorFULL",
-  "street-corn-queso-bowl": "FlavorFULL",
+  "quesarita-enchiladas": "FlavorFULL",
+  "smash-burger-crunchers": "FlavorFULL",
+  "southwestern-alfredo-bowls": "FlavorFULL",
+  "spinach-dip-crunchers": "FlavorFULL",
+  "street-corn-chicken-salad": "FlavorFULL",
+  "stuffed-flatbread": "Heat + Eat",
   "sweet-chili-chicken-wrap": "FlavorFULL",
-  "teriyaki-beef-bowl-no-rice": "FlavorFULL",
-  "white-chicken-enchilada-casserole-bowl": "FlavorFULL",
-  "wicked-chicken-wrap": "FlavorFULL"
+  "teriyaki-beef-bowl-no-rice": "FlavorFULL"
 };
-
-function getCookbookNote(recipe) {
-  const cookbook = COOKBOOK_BY_RECIPE_ID[recipe.id];
-  return cookbook ? `Cookbook: ${cookbook}` : "";
-}
-let selectedIngredients = new Set();
 
 function normalizeWord(value) {
   return String(value || "")
@@ -51,89 +146,85 @@ function normalizeWord(value) {
     .replace(/[^a-z0-9\s-]/g, "");
 }
 
+function getCanonicalIngredient(value) {
+  const item = normalizeWord(value);
+
+  const aliases = {
+    "alfredo sauce": "alfredo",
+    "avocado ranch": "ranch dressing",
+    "bacon bits": "bacon",
+    "bbq sauce": "bbq",
+    "bbq seasoning": "bbq",
+    "bun": "bread",
+    "buns": "bread",
+    "slider buns": "bread",
+    "garlic bread": "bread",
+    "naan": "bread",
+    "flatbread": "bread",
+    "refried beans": "beans",
+    "fire roasted corn": "corn",
+    "mozzarella": "cheese",
+    "feta cheese": "cheese",
+    "cotija cheese": "cheese",
+    "cheddar cheese": "cheese",
+    "parmesan": "cheese",
+    "mozzarella cheese": "cheese",
+    "plain greek yogurt": "greek yogurt",
+    "romaine lettuce": "lettuce",
+    "red onion": "onion",
+    "cooked pasta": "pasta",
+    "cherry tomatoes": "tomato",
+    "rotel": "tomato",
+    "low carb tortilla": "tortilla",
+    "tortillas": "tortilla",
+    "tortilla chips": "tortilla",
+    "turkey pepperoni": "turkey",
+    "ground chicken": "chicken"
+  };
+
+  return aliases[item] || item;
+}
+
 async function getSharedRecipes() {
   const recipes = await app.db.list("recipes", { profileId: "shared" });
   return recipes.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 }
 
-function getAvailableIngredientButtons(recipes) {
-const preferredOrder = [
-  "alfredo sauce",
-  "bacon",
-  "bbq sauce",
-  "beef",
-  "bell peppers",
-  "bread",
-  "broccoli",
-  "buffalo sauce",
-  "bun",
-  "cheese",
-  "chicken",
-  "enchilada sauce",
-  "ground beef",
-  "lettuce",
-  "low carb tortilla",
-  "marinara",
-  "mozzarella",
-  "onion",
-  "parmesan",
-  "pasta",
-  "pesto",
-  "pickles",
-  "pico",
-  "potatoes",
-  "queso",
-  "ranch seasoning",
-  "spinach",
-  "sweet chili sauce",
-  "teriyaki sauce",
-  "tortilla",
-  "turkey"
-];
-
-  const allIngredients = new Set();
-
-  recipes.forEach((recipe) => {
-    (recipe.ingredients || []).forEach((ingredient) => {
-      const cleaned = normalizeWord(ingredient);
-      if (cleaned) allIngredients.add(cleaned);
-    });
-  });
-
-  const allList = [...allIngredients];
-
-  const ordered = preferredOrder.filter((item) => allIngredients.has(item));
-  const remaining = allList
-    .filter((item) => !preferredOrder.includes(item))
-    .sort((a, b) => a.localeCompare(b));
-
-  return [...ordered, ...remaining];
-}
-
 function updateSelectedIngredientsText() {
   const target = document.getElementById("selectedIngredientsText");
-  const items = [...selectedIngredients];
+  const items = [...selectedIngredients].sort((a, b) => a.localeCompare(b));
 
   target.textContent = items.length
     ? `Selected: ${items.join(", ")}`
     : "No ingredients selected yet.";
 }
 
-function renderIngredientButtons(ingredients) {
+function renderIngredientButtons() {
   const target = document.getElementById("ingredientButtons");
   if (!target) return;
 
-  target.innerHTML = ingredients
-    .map((ingredient) => {
-      const isActive = selectedIngredients.has(ingredient);
+  target.innerHTML = Object.entries(INGREDIENT_GROUPS)
+    .map(([groupName, items]) => {
+      const chips = items
+        .map((ingredient) => {
+          const isActive = selectedIngredients.has(ingredient);
+          return `
+            <button
+              type="button"
+              class="ingredient-chip${isActive ? " active" : ""}"
+              data-ingredient="${ingredient}"
+            >
+              ${ingredient}
+            </button>
+          `;
+        })
+        .join("");
+
       return `
-        <button
-          type="button"
-          class="ingredient-chip${isActive ? " active" : ""}"
-          data-ingredient="${ingredient}"
-        >
-          ${ingredient}
-        </button>
+        <section class="ingredient-group">
+          <h3 class="ingredient-group-title">${groupName}</h3>
+          <div class="chip-grid">${chips}</div>
+        </section>
       `;
     })
     .join("");
@@ -149,35 +240,46 @@ function renderIngredientButtons(ingredients) {
         selectedIngredients.add(ingredient);
       }
 
-      renderIngredientButtons(ingredients);
+      renderIngredientButtons();
       updateSelectedIngredientsText();
     });
   });
 }
 
 function scoreRecipe(recipe, selectedList) {
-  const recipeIngredients = (recipe.ingredients || []).map(normalizeWord);
-  const recipeTags = (recipe.ingredientTags || []).map(normalizeWord);
+  const recipeIngredients = (recipe.ingredients || []).map((item) =>
+    getCanonicalIngredient(item)
+  );
+  const recipeTags = (recipe.ingredientTags || []).map((item) =>
+    getCanonicalIngredient(item)
+  );
 
-  let score = 0;
   const matched = [];
 
-  selectedList.forEach((item) => {
+  for (const selected of selectedList) {
     const ingredientMatch = recipeIngredients.some((ingredient) =>
-      ingredient.includes(item) || item.includes(ingredient)
+      ingredient.includes(selected) || selected.includes(ingredient)
     );
 
     const tagMatch = recipeTags.some((tag) =>
-      tag.includes(item) || item.includes(tag)
+      tag.includes(selected) || selected.includes(tag)
     );
 
-    if (ingredientMatch || tagMatch) {
-      score += 3;
-      matched.push(item);
+    if (!ingredientMatch && !tagMatch) {
+      return { score: 0, matched: [] };
     }
-  });
 
-  return { score, matched };
+    matched.push(selected);
+  }
+
+  return {
+    score: matched.length,
+    matched
+  };
+}
+
+function getCookbookNote(recipe) {
+  return COOKBOOK_BY_RECIPE_ID[recipe.id] || "";
 }
 
 function recipeCard(recipe, matchData) {
@@ -189,6 +291,10 @@ function recipeCard(recipe, matchData) {
   ].filter(Boolean).join(" • ");
 
   const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];
+  const cookbook = getCookbookNote(recipe);
+  const extraNotes = [cookbook ? `Cookbook: ${cookbook}` : null, recipe.notes || null]
+    .filter(Boolean)
+    .join(" • ");
 
   return `
     <div class="list-item">
@@ -204,7 +310,7 @@ function recipeCard(recipe, matchData) {
       ${macros ? `<p class="helper-text" style="margin-top:8px;">${macros}</p>` : ""}
       ${matchData.matched.length ? `<p class="helper-text" style="margin-top:8px;">Matched: ${matchData.matched.join(", ")}</p>` : ""}
       ${ingredients.length ? `<p class="helper-text" style="margin-top:8px;">${ingredients.join(" • ")}</p>` : ""}
-      ${recipe.notes ? `<p class="helper-text" style="margin-top:8px;">${recipe.notes}</p>` : ""}
+      ${extraNotes ? `<p class="helper-text" style="margin-top:8px;">${extraNotes}</p>` : ""}
     </div>
   `;
 }
@@ -245,28 +351,28 @@ async function suggestRecipes() {
     });
 
   if (!scored.length) {
-    results.innerHTML = `<div class="empty-state">No matches found. Try broader ingredients like chicken, cheese, tortilla, pasta, or broccoli.</div>`;
+    results.innerHTML = `<div class="empty-state">No recipes match all selected ingredients.</div>`;
     return;
   }
 
-  results.innerHTML = scored.slice(0, 10).map((item) => recipeCard(item.recipe, item.matchData)).join("");
+  results.innerHTML = scored
+    .slice(0, 10)
+    .map((item) => recipeCard(item.recipe, item.matchData))
+    .join("");
 }
 
 async function init() {
   await app.ensureApp();
   app.requireProfile();
 
-  const recipes = await getSharedRecipes();
-  const ingredients = getAvailableIngredientButtons(recipes);
-
-  renderIngredientButtons(ingredients);
+  renderIngredientButtons();
   updateSelectedIngredientsText();
 
   document.getElementById("suggestButton")?.addEventListener("click", suggestRecipes);
 
   document.getElementById("clearIngredients")?.addEventListener("click", () => {
     selectedIngredients.clear();
-    renderIngredientButtons(ingredients);
+    renderIngredientButtons();
     updateSelectedIngredientsText();
     document.getElementById("suggestResults").innerHTML =
       `<div class="empty-state">Tap ingredients above to get recipe ideas.</div>`;

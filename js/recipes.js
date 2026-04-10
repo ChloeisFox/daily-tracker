@@ -412,8 +412,708 @@ const DEFAULT_SHARED_RECIPES = [
     ],
     ingredientTags: ["wrap","chicken"],
     notes: ""
-  }
+  }, {
+  id: "cobb-chicken-wrap",
+  profileId: "shared",
+  name: "Cobb Chicken Wrap",
+  category: "Lunch",
+  calories: 320,
+  protein: 28,
+  carbs: 22,
+  fat: 14,
+  ingredients: [
+    "low carb tortilla",
+    "chicken",
+    "bacon",
+    "egg",
+    "lettuce",
+    "tomato",
+    "ranch dressing"
+  ],
+  ingredientTags: ["wrap","chicken","bacon"],
+  notes: "FlavorFULL"
+},
 
+{
+  id: "mexi-cali-wrap",
+  profileId: "shared",
+  name: "Mexi Cali Wrap",
+  category: "Lunch",
+  calories: 300,
+  protein: 26,
+  carbs: 24,
+  fat: 12,
+  ingredients: [
+    "low carb tortilla",
+    "chicken",
+    "avocado",
+    "pico",
+    "cheese",
+    "chipotle sauce"
+  ],
+  ingredientTags: ["wrap","chicken","mexican"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "pizza-sub-wrap",
+  profileId: "shared",
+  name: "Pizza Sub Wrap",
+  category: "Lunch",
+  calories: 310,
+  protein: 24,
+  carbs: 28,
+  fat: 12,
+  ingredients: [
+    "low carb tortilla",
+    "turkey pepperoni",
+    "marinara",
+    "cheese"
+  ],
+  ingredientTags: ["wrap","pizza"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "jerk-chicken-wrap",
+  profileId: "shared",
+  name: "Jerk Chicken Wrap",
+  category: "Lunch",
+  calories: 280,
+  protein: 26,
+  carbs: 24,
+  fat: 10,
+  ingredients: [
+    "low carb tortilla",
+    "chicken",
+    "jerk seasoning",
+    "pineapple",
+    "lettuce",
+    "sauce"
+  ],
+  ingredientTags: ["wrap","chicken"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "french-dip-crunchers",
+  profileId: "shared",
+  name: "French Dip Crunchers",
+  category: "Lunch",
+  calories: 265,
+  protein: 30,
+  carbs: 18,
+  fat: 10,
+  ingredients: [
+    "low carb tortilla",
+    "roast beef",
+    "cheese",
+    "au jus",
+    "greek yogurt"
+  ],
+  ingredientTags: ["beef","wrap"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "spinach-dip-crunchers",
+  profileId: "shared",
+  name: "Spinach Dip Crunchers",
+  category: "Snack",
+  calories: 250,
+  protein: 18,
+  carbs: 20,
+  fat: 12,
+  ingredients: [
+    "low carb tortilla",
+    "spinach dip",
+    "cheese"
+  ],
+  ingredientTags: ["spinach","cheese"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "smash-burger-crunchers",
+  profileId: "shared",
+  name: "Smash Burger Crunchers",
+  category: "Lunch",
+  calories: 330,
+  protein: 26,
+  carbs: 22,
+  fat: 16,
+  ingredients: [
+    "low carb tortilla",
+    "ground beef",
+    "cheese",
+    "pickles",
+    "burger sauce"
+  ],
+  ingredientTags: ["beef","burger"],
+  notes: "FlavorFULL"
+},
+{
+  id: "bbq-chicken-pasta-salad",
+  profileId: "shared",
+  name: "BBQ Chicken Pasta Salad",
+  category: "Lunch",
+  calories: 322,
+  protein: 35,
+  carbs: 34,
+  fat: 7,
+  ingredients: [
+    "cooked pasta",
+    "chicken",
+    "bbq sauce",
+    "bacon bits",
+    "corn",
+    "red onion",
+    "lettuce",
+    "spinach",
+    "ranch dressing",
+    "bbq seasoning"
+  ],
+  ingredientTags: ["chicken", "pasta", "bbq", "salad"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "blt-pasta-salad",
+  profileId: "shared",
+  name: "BLT Pasta Salad",
+  category: "Lunch",
+  calories: 348,
+  protein: 39,
+  carbs: 25,
+  fat: 11,
+  ingredients: [
+    "cooked pasta",
+    "chicken",
+    "bacon bits",
+    "cheddar cheese",
+    "cherry tomatoes",
+    "lettuce",
+    "spinach",
+    "light mayo",
+    "plain greek yogurt",
+    "ranch seasoning"
+  ],
+  ingredientTags: ["chicken", "pasta", "bacon", "salad"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "buffalo-chicken-pasta-salad",
+  profileId: "shared",
+  name: "Buffalo Chicken Pasta Salad",
+  category: "Lunch",
+  calories: 242,
+  protein: 34,
+  carbs: 26,
+  fat: 1,
+  ingredients: [
+    "cooked pasta",
+    "chicken",
+    "shredded carrots",
+    "celery",
+    "red onion",
+    "lettuce",
+    "spinach",
+    "plain greek yogurt",
+    "ranch seasoning",
+    "hot sauce"
+  ],
+  ingredientTags: ["chicken", "pasta", "buffalo", "salad"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "chopped-chicken-bacon-ranch-bowl",
+  profileId: "shared",
+  name: "Chopped Chicken Bacon Ranch Bowl",
+  category: "Lunch",
+  calories: 385,
+  protein: 40,
+  carbs: 27,
+  fat: 14,
+  ingredients: [
+    "cooked pasta",
+    "chicken",
+    "bacon bits",
+    "cheddar cheese",
+    "banana peppers",
+    "lettuce",
+    "ranch dressing",
+    "light italian dressing"
+  ],
+  ingredientTags: ["chicken", "bacon", "ranch", "salad"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "chopped-greek",
+  profileId: "shared",
+  name: "Chopped Greek",
+  category: "Lunch",
+  calories: 265,
+  protein: 31,
+  carbs: 22,
+  fat: 6,
+  ingredients: [
+    "cooked pasta",
+    "chicken",
+    "feta cheese",
+    "cherry tomatoes",
+    "cucumber",
+    "banana peppers or pepperoncini",
+    "lettuce",
+    "spinach",
+    "tzatziki sauce"
+  ],
+  ingredientTags: ["chicken", "greek", "pasta", "salad"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "chopped-italian-beef-bowl",
+  profileId: "shared",
+  name: "Chopped Italian Beef Bowl",
+  category: "Lunch",
+  calories: 238,
+  protein: 24,
+  carbs: 29,
+  fat: 5,
+  ingredients: [
+    "cooked pasta",
+    "deli roast beef",
+    "banana peppers",
+    "mozzarella cheese",
+    "red onion",
+    "lettuce",
+    "spinach",
+    "plain greek yogurt",
+    "au jus seasoning"
+  ],
+  ingredientTags: ["beef", "italian", "pasta", "salad"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "grinder-de-gallo",
+  profileId: "shared",
+  name: "Grinder de Gallo",
+  category: "Lunch",
+  calories: 213,
+  protein: 21,
+  carbs: 9,
+  fat: 10,
+  ingredients: [
+    "turkey pepperoni",
+    "ham or turkey",
+    "banana peppers",
+    "cherry tomatoes",
+    "red onion",
+    "shredded lettuce",
+    "light mayo",
+    "light italian dressing"
+  ],
+  ingredientTags: ["turkey", "pepperoni", "italian", "salad"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "lettuce-wrap-bowl",
+  profileId: "shared",
+  name: "Lettuce Wrap Bowl",
+  category: "Lunch",
+  calories: 284,
+  protein: 27,
+  carbs: 15,
+  fat: 16,
+  ingredients: [
+    "ground chicken",
+    "carrots",
+    "mushrooms",
+    "onion",
+    "teriyaki sauce",
+    "romaine lettuce",
+    "peanut butter",
+    "mayo",
+    "sriracha",
+    "soy sauce"
+  ],
+  ingredientTags: ["chicken", "lettuce", "asian", "salad"],
+  notes: "Heat + Eat"
+},
+
+{
+  id: "marry-me-pasta-salad-bowl",
+  profileId: "shared",
+  name: "Marry Me Pasta Salad Bowl",
+  category: "Lunch",
+  calories: 298,
+  protein: 29,
+  carbs: 28,
+  fat: 7,
+  ingredients: [
+    "cooked pasta",
+    "chicken",
+    "sun dried tomatoes",
+    "parmesan",
+    "spinach",
+    "alfredo sauce",
+    "sun dried tomato pesto"
+  ],
+  ingredientTags: ["chicken", "pasta", "alfredo", "salad"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "street-corn-chicken-salad",
+  profileId: "shared",
+  name: "Street Corn Chicken Salad",
+  category: "Lunch",
+  calories: 392,
+  protein: 35,
+  carbs: 30,
+  fat: 15,
+  ingredients: [
+    "cooked pasta",
+    "chicken",
+    "bacon bits",
+    "fire roasted corn",
+    "red onion",
+    "cilantro",
+    "lettuce",
+    "spinach",
+    "avocado ranch",
+    "lime",
+    "cotija cheese"
+  ],
+  ingredientTags: ["chicken", "corn", "pasta", "salad"],
+  notes: "FlavorFULL"
+},
+{
+  id: "creamy-chicken-spinach-bake",
+  profileId: "shared",
+  name: "Creamy Chicken Spinach Bake",
+  category: "Dinner",
+  calories: 340,
+  protein: 35,
+  carbs: 10,
+  fat: 18,
+  ingredients: [
+    "chicken",
+    "spinach",
+    "cream cheese",
+    "mozzarella",
+    "garlic",
+    "seasoning"
+  ],
+  ingredientTags: ["chicken","spinach","creamy"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "cool-ranch-chicken-casserole",
+  profileId: "shared",
+  name: "Cool Ranch Chicken Casserole",
+  category: "Dinner",
+  calories: 360,
+  protein: 32,
+  carbs: 12,
+  fat: 18,
+  ingredients: [
+    "chicken",
+    "cream cheese",
+    "ranch seasoning",
+    "cheese",
+    "tortilla chips"
+  ],
+  ingredientTags: ["chicken","ranch","casserole"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "garlic-bread-pizza-burgers",
+  profileId: "shared",
+  name: "Garlic Bread Pizza Burgers",
+  category: "Dinner",
+  calories: 420,
+  protein: 30,
+  carbs: 35,
+  fat: 20,
+  ingredients: [
+    "ground beef",
+    "garlic bread",
+    "marinara",
+    "cheese",
+    "pepperoni"
+  ],
+  ingredientTags: ["beef","pizza"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "honey-butter-chicken",
+  profileId: "shared",
+  name: "Honey Butter Chicken",
+  category: "Dinner",
+  calories: 325,
+  protein: 27,
+  carbs: 31,
+  fat: 11,
+  ingredients: [
+    "chicken",
+    "butter",
+    "honey",
+    "garlic",
+    "seasoning",
+    "vegetables"
+  ],
+  ingredientTags: ["chicken","sweet"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "orange-chicken-bowls",
+  profileId: "shared",
+  name: "Orange Chicken Bowls (No Rice)",
+  category: "Dinner",
+  calories: 365,
+  protein: 29,
+  carbs: 30,
+  fat: 6,
+  ingredients: [
+    "chicken",
+    "orange sauce",
+    "soy sauce",
+    "garlic",
+    "vegetables"
+  ],
+  ingredientTags: ["chicken","asian"],
+  notes: "Rice removed"
+},
+
+{
+  id: "philly-cheese-casserole",
+  profileId: "shared",
+  name: "Philly Cheese Casserole",
+  category: "Dinner",
+  calories: 380,
+  protein: 34,
+  carbs: 12,
+  fat: 22,
+  ingredients: [
+    "ground beef",
+    "onion",
+    "peppers",
+    "cheese",
+    "cream cheese"
+  ],
+  ingredientTags: ["beef","cheese"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "quesarita-enchiladas",
+  profileId: "shared",
+  name: "Quesarita Enchiladas",
+  category: "Dinner",
+  calories: 400,
+  protein: 30,
+  carbs: 30,
+  fat: 18,
+  ingredients: [
+    "tortilla",
+    "ground beef",
+    "cheese",
+    "enchilada sauce",
+    "queso"
+  ],
+  ingredientTags: ["beef","mexican"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "southwestern-alfredo-bowls",
+  profileId: "shared",
+  name: "Southwestern Alfredo Bowls",
+  category: "Dinner",
+  calories: 408,
+  protein: 37,
+  carbs: 34,
+  fat: 14,
+  ingredients: [
+    "pasta",
+    "chicken",
+    "alfredo",
+    "rotel",
+    "cheese",
+    "fajita seasoning"
+  ],
+  ingredientTags: ["chicken","pasta","southwestern"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "stuffed-flatbread",
+  profileId: "shared",
+  name: "Stuffed Flatbread",
+  category: "Lunch",
+  calories: 350,
+  protein: 30,
+  carbs: 30,
+  fat: 12,
+  ingredients: [
+    "flatbread",
+    "chicken",
+    "cheese",
+    "sauce"
+  ],
+  ingredientTags: ["flatbread","chicken"],
+  notes: "Heat + Eat"
+},
+
+{
+  id: "teriyaki-beef-bowl-no-rice",
+  profileId: "shared",
+  name: "Teriyaki Beef Bowl (No Rice)",
+  category: "Dinner",
+  calories: 280,
+  protein: 28,
+  carbs: 10,
+  fat: 12,
+  ingredients: [
+    "ground beef",
+    "teriyaki sauce",
+    "soy sauce",
+    "vegetables"
+  ],
+  ingredientTags: ["beef","asian"],
+  notes: "Rice removed"
+},{
+  id: "club-sliders",
+  profileId: "shared",
+  name: "Club Sliders",
+  category: "Dinner",
+  calories: 330,
+  protein: 24,
+  carbs: 28,
+  fat: 14,
+  ingredients: [
+    "slider buns",
+    "turkey",
+    "ham",
+    "bacon",
+    "cheese",
+    "mayo",
+    "lettuce"
+  ],
+  ingredientTags: ["turkey","bacon","sliders"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "crunchwrap-sliders",
+  profileId: "shared",
+  name: "Crunchwrap Sliders",
+  category: "Dinner",
+  calories: 380,
+  protein: 28,
+  carbs: 30,
+  fat: 18,
+  ingredients: [
+    "ground beef",
+    "tortillas",
+    "cheese",
+    "queso",
+    "lettuce",
+    "taco seasoning"
+  ],
+  ingredientTags: ["beef","mexican","sliders"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "garlic-parm-sliders",
+  profileId: "shared",
+  name: "Garlic Parm Sliders",
+  category: "Dinner",
+  calories: 360,
+  protein: 30,
+  carbs: 28,
+  fat: 16,
+  ingredients: [
+    "slider buns",
+    "chicken",
+    "parmesan",
+    "garlic butter",
+    "cheese"
+  ],
+  ingredientTags: ["chicken","garlic","sliders"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "garlic-bread-pizza-burgers",
+  profileId: "shared",
+  name: "Garlic Bread Pizza Burgers",
+  category: "Dinner",
+  calories: 420,
+  protein: 30,
+  carbs: 35,
+  fat: 20,
+  ingredients: [
+    "ground beef",
+    "garlic bread",
+    "marinara",
+    "cheese",
+    "pepperoni"
+  ],
+  ingredientTags: ["beef","pizza"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "loaded-alfredo-fries",
+  profileId: "shared",
+  name: "Loaded Alfredo Fries",
+  category: "Dinner",
+  calories: 370,
+  protein: 28,
+  carbs: 35,
+  fat: 14,
+  ingredients: [
+    "potatoes",
+    "chicken",
+    "alfredo sauce",
+    "cheese",
+    "bacon"
+  ],
+  ingredientTags: ["chicken","fries","alfredo"],
+  notes: "FlavorFULL"
+},
+
+{
+  id: "philly-cheese-sliders",
+  profileId: "shared",
+  name: "Philly Cheese Sliders",
+  category: "Dinner",
+  calories: 390,
+  protein: 32,
+  carbs: 30,
+  fat: 18,
+  ingredients: [
+    "ground beef",
+    "slider buns",
+    "peppers",
+    "onion",
+    "cheese"
+  ],
+  ingredientTags: ["beef","sliders"],
+  notes: "FlavorFULL"
+}
 ];
 
 function recipeCollectionName() {
