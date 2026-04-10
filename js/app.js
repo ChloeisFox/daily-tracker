@@ -1,8 +1,34 @@
 import { firebaseSettings, collections } from './firebase-config.js';
 
 const STARTER_PROFILES = [
-  { id: 'chloe', name: 'Chloe', pin: '5629', createdAt: new Date().toISOString(), theme: 'light', goals: { startWeight: '', goalWeight: '', calorieTarget: 1800, proteinTarget: 100, weighInDays: 5 } },
-  { id: 'isa', name: 'Isa', pin: '2525', createdAt: new Date().toISOString(), theme: 'light', goals: { startWeight: '', goalWeight: '', calorieTarget: 1800, proteinTarget: 100, weighInDays: 5 } }
+  {
+    id: 'chloe',
+    name: 'Chloe',
+    pin: '5629',
+    createdAt: new Date().toISOString(),
+    theme: 'light',
+    goals: {
+      startWeight: '',
+      goalWeight: '',
+      calorieTarget: 1800,
+      proteinTarget: 100,
+      weighInDays: 5
+    }
+  },
+  {
+    id: 'isa',
+    name: 'Isa',
+    pin: '2525',
+    createdAt: new Date().toISOString(),
+    theme: 'light',
+    goals: {
+      startWeight: '',
+      goalWeight: '',
+      calorieTarget: 1800,
+      proteinTarget: 100,
+      weighInDays: 5
+    }
+  }
 ];
 
 const storage = {
@@ -14,6 +40,7 @@ const storage = {
       return fallback;
     }
   },
+
   set(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -22,10 +49,23 @@ const storage = {
 const db = {
   async init() {
     this.mode = firebaseSettings.enabled ? 'firebase' : 'local';
+
     if (this.mode === 'firebase') {
       try {
         const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js');
-        const { getFirestore, collection, getDocs, getDoc, doc, setDoc, addDoc, deleteDoc, query, where } = await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js');
+        const {
+          getFirestore,
+          collection,
+          getDocs,
+          getDoc,
+          doc,
+          setDoc,
+          addDoc,
+          deleteDoc,
+          query,
+          where
+        } = await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js');
+
         this._sdk = { collection, getDocs, getDoc, doc, setDoc, addDoc, deleteDoc, query, where };
         this.app = initializeApp(firebaseSettings.config);
         this.firestore = getFirestore(this.app);
@@ -49,11 +89,15 @@ const db = {
     if (this.mode === 'local') {
       const list = storage.get(name, []);
       if (!filter) return list;
-      return list.filter((item) => Object.entries(filter).every(([k, v]) => item[k] === v));
+
+      return list.filter((item) =>
+        Object.entries(filter).every(([k, v]) => item[k] === v)
+      );
     }
 
     const { collection, getDocs, query, where } = this._sdk;
-    let ref = collection(this.firestore, name);
+    const ref = collection(this.firestore, name);
+
     let snapshot;
     if (filter) {
       const clauses = Object.entries(filter).map(([k, v]) => where(k, '==', v));
@@ -61,6 +105,7 @@ const db = {
     } else {
       snapshot = await getDocs(ref);
     }
+
     return snapshot.docs.map((docItem) => ({ id: docItem.id, ...docItem.data() }));
   },
 
@@ -69,10 +114,17 @@ const db = {
       const list = storage.get(name, []);
       const item = { ...payload, id };
       const index = list.findIndex((entry) => entry.id === id);
-      if (index >= 0) list[index] = item; else list.push(item);
+
+      if (index >= 0) {
+        list[index] = item;
+      } else {
+        list.push(item);
+      }
+
       storage.set(name, list);
       return item;
     }
+
     const { doc, setDoc } = this._sdk;
     await setDoc(doc(this.firestore, name, id), payload, { merge: true });
     return { id, ...payload };
@@ -89,26 +141,49 @@ const db = {
       storage.set(name, list);
       return;
     }
+
     const { doc, deleteDoc } = this._sdk;
     await deleteDoc(doc(this.firestore, name, id));
   }
 };
 
 const helpers = {
-  today() { return new Date().toISOString().slice(0, 10); },
+  today() {
+    return new Date().toISOString().slice(0, 10);
+  },
+
   formatDate(dateString) {
     if (!dateString) return '--';
-    return new Date(`${dateString}T12:00:00`).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
+
+    return new Date(`${dateString}T12:00:00`).toLocaleDateString(undefined, {
+      weekday: 'long',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
   },
+
   formatNumber(value, digits = 0) {
     return Number.isFinite(Number(value)) ? Number(value).toFixed(digits) : '--';
   },
+
   slugify(value) {
-    return String(value).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    return String(value)
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
   },
+
   initials(name) {
-    return name.split(' ').map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+    return name
+      .split(' ')
+      .map((part) => part[0])
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
   },
+
   calcDayTotals({ meals, workouts, settings }) {
     const mealCalories = meals.reduce((sum, meal) => sum + Number(meal.calories || 0), 0);
     const protein = meals.reduce((sum, meal) => sum + Number(meal.protein || 0), 0);
@@ -118,7 +193,17 @@ const helpers = {
     const workoutMinutes = workouts.reduce((sum, workout) => sum + Number(workout.minutes || 0), 0);
     const calorieTarget = Number(settings?.goals?.calorieTarget || 0);
     const caloriesLeft = calorieTarget ? calorieTarget - mealCalories + caloriesBurned : 0;
-    return { mealCalories, protein, carbs, fats, caloriesBurned, workoutMinutes, calorieTarget, caloriesLeft };
+
+    return {
+      mealCalories,
+      protein,
+      carbs,
+      fats,
+      caloriesBurned,
+      workoutMinutes,
+      calorieTarget,
+      caloriesLeft
+    };
   }
 };
 
@@ -138,7 +223,10 @@ function applyTheme(theme) {
   const button = document.getElementById('themeToggle');
   if (button) {
     button.textContent = resolvedTheme === 'dark' ? '☀' : '◐';
-    button.setAttribute('aria-label', resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    button.setAttribute(
+      'aria-label',
+      resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+    );
   }
 }
 
@@ -156,31 +244,6 @@ function installThemeToggle() {
   };
 }
 
-function installThemeToggle() {
-  const button = document.getElementById('themeToggle');
-  const current = localStorage.getItem('preferredTheme') || 'light';
-
-  applyTheme(current);
-
-  if (!button) return;
-
-  button.addEventListener('click', () => {
-    const next = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
-    applyTheme(next);
-  });
-}
-
-function installThemeToggle() {
-  const button = document.getElementById('themeToggle');
-  if (!button) return;
-  const current = localStorage.getItem('preferredTheme') || 'light';
-  applyTheme(current);
-  button.addEventListener('click', () => {
-    const next = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
-    applyTheme(next);
-  });
-}
-
 function getCurrentProfile() {
   return storage.get('currentProfile', null);
 }
@@ -189,17 +252,10 @@ function setCurrentProfile(profile) {
   storage.set('currentProfile', profile);
 }
 
-async function ensureApp() {
-  await db.init();
-  installThemeToggle();
-
-  if ('serviceWorker' in navigator) {
-    try { await navigator.serviceWorker.register('./service-worker.js'); } catch (error) { console.warn('Service worker registration failed.', error); }
-  }
-}
-
 function requireProfile() {
-  if (!getCurrentProfile()) window.location.href = 'index.html';
+  if (!getCurrentProfile()) {
+    window.location.href = 'index.html';
+  }
 }
 
 let appReadyPromise = null;
@@ -223,5 +279,16 @@ async function ensureApp() {
   return appReadyPromise;
 }
 
-window.dailyTracker = { db, helpers, storage, collections, getCurrentProfile, setCurrentProfile, requireProfile, ensureApp, applyTheme };
+window.dailyTracker = {
+  db,
+  helpers,
+  storage,
+  collections,
+  getCurrentProfile,
+  setCurrentProfile,
+  requireProfile,
+  ensureApp,
+  applyTheme
+};
+
 ensureApp();
