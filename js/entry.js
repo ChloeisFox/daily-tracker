@@ -1,6 +1,29 @@
 const app = window.dailyTracker;
 
 const DEFAULT_SHARED_RECIPES = [
+
+  {
+    id: "bbq-bacon-cheeseburger-bowls",
+    profileId: "shared",
+    name: "BBQ Bacon Cheeseburger Bowls",
+    category: "Dinner",
+    calories: 315,
+    protein: 30,
+    carbs: 20,
+    fat: 11,
+    ingredients: [
+      "ground beef",
+      "potatoes",
+      "onion",
+      "bacon bits",
+      "bbq sauce",
+      "chipotle sauce",
+      "cheese"
+    ],
+    ingredientTags: ["beef","bbq","bacon"],
+    notes: ""
+  },
+
   {
     id: "beef-enchilada-bowl",
     profileId: "shared",
@@ -11,16 +34,17 @@ const DEFAULT_SHARED_RECIPES = [
     carbs: 8,
     fat: 10,
     ingredients: [
-      "lean ground beef",
+      "ground beef",
       "refried beans",
       "enchilada sauce",
       "queso",
-      "shredded cheese",
+      "cheese",
       "pico"
     ],
-    ingredientTags: ["beef", "mexican", "cheese", "sauce"],
+    ingredientTags: ["beef","mexican"],
     notes: "Rice removed"
   },
+
   {
     id: "big-mac-bowl",
     profileId: "shared",
@@ -38,9 +62,10 @@ const DEFAULT_SHARED_RECIPES = [
       "cheese",
       "burger sauce"
     ],
-    ingredientTags: ["beef", "low-carb", "burger"],
+    ingredientTags: ["beef","low-carb"],
     notes: "Rice removed"
   },
+
   {
     id: "buffalo-chicken-quesadilla",
     profileId: "shared",
@@ -52,33 +77,35 @@ const DEFAULT_SHARED_RECIPES = [
     fat: 12,
     ingredients: [
       "low carb tortilla",
-      "canned chicken",
-      "cream cheese spread",
+      "chicken",
       "buffalo sauce",
-      "shredded cheese"
+      "cheese"
     ],
-    ingredientTags: ["tortilla", "chicken", "cheese", "buffalo"],
+    ingredientTags: ["chicken","tortilla"],
     notes: ""
   },
+
   {
-    id: "burrito-bowl",
+    id: "cali-club-wrap",
     profileId: "shared",
-    name: "Burrito Bowl (No Rice)",
-    category: "Dinner",
-    calories: 210,
-    protein: 26,
-    carbs: 6,
-    fat: 9,
+    name: "Cali Club Wrap",
+    category: "Lunch",
+    calories: 284,
+    protein: 23,
+    carbs: 22,
+    fat: 10,
     ingredients: [
-      "ground beef",
-      "refried beans",
-      "queso",
-      "shredded cheese",
-      "pico"
+      "low carb tortilla",
+      "turkey",
+      "bacon",
+      "avocado",
+      "ranch seasoning",
+      "chipotle sauce"
     ],
-    ingredientTags: ["beef", "mexican"],
-    notes: "Rice removed"
+    ingredientTags: ["wrap","turkey","bacon"],
+    notes: ""
   },
+
   {
     id: "chicken-alfredo-bowl",
     profileId: "shared",
@@ -91,13 +118,14 @@ const DEFAULT_SHARED_RECIPES = [
     ingredients: [
       "chicken",
       "pasta",
-      "alfredo sauce",
+      "alfredo",
       "broccoli",
-      "shredded cheese"
+      "cheese"
     ],
-    ingredientTags: ["chicken", "pasta", "alfredo"],
+    ingredientTags: ["chicken","pasta"],
     notes: ""
   },
+
   {
     id: "chicken-enchilada-bowl",
     profileId: "shared",
@@ -109,34 +137,34 @@ const DEFAULT_SHARED_RECIPES = [
     fat: 6,
     ingredients: [
       "chicken",
-      "black beans",
+      "beans",
       "enchilada sauce",
       "queso",
-      "shredded cheese"
+      "cheese"
     ],
-    ingredientTags: ["chicken", "mexican"],
+    ingredientTags: ["chicken","mexican"],
     notes: "Rice removed"
   },
+
   {
     id: "chicken-parm-bowl",
     profileId: "shared",
     name: "Chicken Parm Bowl",
     category: "Dinner",
-    calories: 388,
-    protein: 42,
-    carbs: 37,
-    fat: 8,
+    calories: 364,
+    protein: 32,
+    carbs: 38,
+    fat: 6,
     ingredients: [
       "chicken",
-      "protein pasta",
-      "cottage cheese",
+      "pasta",
       "marinara",
-      "parmesan",
-      "mozzarella"
+      "cheese"
     ],
-    ingredientTags: ["chicken", "pasta", "marinara", "cheese"],
-    notes: "FlavorFULL version"
+    ingredientTags: ["chicken","pasta"],
+    notes: ""
   },
+
   {
     id: "chicken-teriyaki-bowl",
     profileId: "shared",
@@ -151,30 +179,69 @@ const DEFAULT_SHARED_RECIPES = [
       "broccoli",
       "teriyaki sauce"
     ],
-    ingredientTags: ["chicken", "asian", "teriyaki"],
+    ingredientTags: ["chicken","asian"],
     notes: "Rice removed"
   },
+
   {
-    id: "creamy-lemon-chicken",
+    id: "chili-mac-bowls",
     profileId: "shared",
-    name: "Creamy Lemon Chicken",
+    name: "Chili Mac Bowls",
     category: "Dinner",
-    calories: 368,
-    protein: 32,
-    carbs: 26,
-    fat: 15,
+    calories: 383,
+    protein: 37,
+    carbs: 25,
+    fat: 14,
     ingredients: [
-      "instant mashed potatoes",
-      "cauliflower rice",
-      "chicken",
-      "alfredo sauce",
-      "bone broth",
-      "mozzarella",
-      "lemon"
+      "ground beef",
+      "pasta",
+      "chili seasoning",
+      "cheese"
     ],
-    ingredientTags: ["chicken", "lemon", "creamy"],
-    notes: "FlavorFULL version"
+    ingredientTags: ["beef","pasta"],
+    notes: ""
   },
+
+  {
+    id: "cowboy-butter-bowls",
+    profileId: "shared",
+    name: "Cowboy Butter Bowls",
+    category: "Dinner",
+    calories: 288,
+    protein: 28,
+    carbs: 26,
+    fat: 9,
+    ingredients: [
+      "chicken",
+      "potatoes",
+      "butter",
+      "garlic",
+      "cream cheese"
+    ],
+    ingredientTags: ["chicken","butter"],
+    notes: ""
+  },
+
+  {
+    id: "crispy-chipotle-chicken-wrap",
+    profileId: "shared",
+    name: "Crispy Chipotle Chicken Wrap",
+    category: "Lunch",
+    calories: 294,
+    protein: 28,
+    carbs: 31,
+    fat: 8,
+    ingredients: [
+      "low carb tortilla",
+      "chicken",
+      "bbq sauce",
+      "chipotle sauce",
+      "bacon"
+    ],
+    ingredientTags: ["wrap","chicken","chipotle"],
+    notes: ""
+  },
+
   {
     id: "egg-roll-bowl",
     profileId: "shared",
@@ -188,12 +255,12 @@ const DEFAULT_SHARED_RECIPES = [
       "ground beef",
       "cabbage",
       "carrots",
-      "soy sauce",
-      "teriyaki sauce"
+      "soy sauce"
     ],
-    ingredientTags: ["beef", "cabbage", "low-carb"],
+    ingredientTags: ["beef","low-carb"],
     notes: "Rice removed"
   },
+
   {
     id: "fajita-bowl",
     profileId: "shared",
@@ -205,13 +272,14 @@ const DEFAULT_SHARED_RECIPES = [
     fat: 7,
     ingredients: [
       "chicken",
-      "bell peppers",
+      "peppers",
       "onion",
       "queso"
     ],
-    ingredientTags: ["chicken", "mexican", "peppers"],
+    ingredientTags: ["chicken","mexican"],
     notes: "Rice removed"
   },
+
   {
     id: "lasagna-bowl",
     profileId: "shared",
@@ -225,75 +293,12 @@ const DEFAULT_SHARED_RECIPES = [
       "pasta",
       "ground beef",
       "marinara",
-      "greek yogurt",
-      "mozzarella",
-      "parmesan"
+      "cheese"
     ],
-    ingredientTags: ["pasta", "beef", "cheese"],
+    ingredientTags: ["pasta","beef"],
     notes: ""
   },
-  {
-    id: "lettuce-wrap-bowl",
-    profileId: "shared",
-    name: "Lettuce Wrap Bowl",
-    category: "Lunch",
-    calories: 284,
-    protein: 27,
-    carbs: 15,
-    fat: 16,
-    ingredients: [
-      "ground chicken",
-      "lettuce",
-      "teriyaki sauce",
-      "peanut sauce"
-    ],
-    ingredientTags: ["chicken", "lettuce", "low-carb"],
-    notes: ""
-  },
-  {
-    id: "loaded-chicken-casserole",
-    profileId: "shared",
-    name: "Loaded Chicken Casserole",
-    category: "Dinner",
-    calories: 177,
-    protein: 10,
-    carbs: 7,
-    fat: 12,
-    ingredients: [
-      "cream cheese",
-      "plain greek yogurt",
-      "cream of chicken soup",
-      "ranch seasoning",
-      "shredded cheese",
-      "bacon bits",
-      "shredded chicken",
-      "ritz crackers",
-      "butter"
-    ],
-    ingredientTags: ["chicken", "casserole", "cheese", "bacon"],
-    notes: "Heat + Eat version; served without rice"
-  },
-  {
-    id: "marry-me-pasta-salad-bowl",
-    profileId: "shared",
-    name: "Marry Me Pasta Salad Bowl",
-    category: "Dinner",
-    calories: 298,
-    protein: 29,
-    carbs: 28,
-    fat: 7,
-    ingredients: [
-      "cooked pasta",
-      "chicken",
-      "sun dried tomatoes",
-      "parmesan",
-      "spinach",
-      "alfredo sauce",
-      "sun dried tomato pesto"
-    ],
-    ingredientTags: ["chicken", "pasta", "alfredo"],
-    notes: "FlavorFULL version"
-  },
+
   {
     id: "mcchicken-sandwich",
     profileId: "shared",
@@ -304,15 +309,15 @@ const DEFAULT_SHARED_RECIPES = [
     carbs: 22,
     fat: 7,
     ingredients: [
-      "frozen chicken patty",
-      "low carb bread or bun",
-      "light mayo",
-      "shredded lettuce",
-      "pickles"
+      "chicken",
+      "bun",
+      "lettuce",
+      "mayo"
     ],
-    ingredientTags: ["chicken", "sandwich"],
-    notes: "Heat + Eat version"
+    ingredientTags: ["chicken","sandwich"],
+    notes: ""
   },
+
   {
     id: "mcchicken-wrap",
     profileId: "shared",
@@ -324,34 +329,14 @@ const DEFAULT_SHARED_RECIPES = [
     fat: 16,
     ingredients: [
       "low carb tortilla",
-      "crispy chicken",
+      "chicken",
       "lettuce",
       "mayo"
     ],
-    ingredientTags: ["wrap", "chicken"],
+    ingredientTags: ["wrap","chicken"],
     notes: ""
   },
-  {
-    id: "microwave-loaded-hb-casserole",
-    profileId: "shared",
-    name: "Microwave Loaded HB Casserole",
-    category: "Dinner",
-    calories: 361,
-    protein: 42,
-    carbs: 25,
-    fat: 10,
-    ingredients: [
-      "shredded hashbrowns",
-      "chicken",
-      "cottage cheese",
-      "laughing cow cheese",
-      "ranch seasoning",
-      "shredded cheese",
-      "bacon bits"
-    ],
-    ingredientTags: ["chicken", "potato", "casserole", "bacon"],
-    notes: "FlavorFULL version"
-  },
+
   {
     id: "million-dollar-pasta",
     profileId: "shared",
@@ -367,9 +352,29 @@ const DEFAULT_SHARED_RECIPES = [
       "cheese",
       "sauce"
     ],
-    ingredientTags: ["pasta", "beef", "cheese"],
+    ingredientTags: ["pasta","beef"],
     notes: ""
   },
+
+  {
+    id: "pizza-lunchable",
+    profileId: "shared",
+    name: "Pizza Lunchable",
+    category: "Lunch",
+    calories: 263,
+    protein: 16,
+    carbs: 31,
+    fat: 10,
+    ingredients: [
+      "naan",
+      "cheese",
+      "turkey pepperoni",
+      "marinara"
+    ],
+    ingredientTags: ["pizza"],
+    notes: ""
+  },
+
   {
     id: "pesto-quesadilla",
     profileId: "shared",
@@ -385,267 +390,10 @@ const DEFAULT_SHARED_RECIPES = [
       "pesto",
       "cheese"
     ],
-    ingredientTags: ["tortilla", "chicken", "pesto"],
+    ingredientTags: ["chicken","tortilla"],
     notes: ""
   },
-  {
-    id: "sausage-rigatoni-bowls",
-    profileId: "shared",
-    name: "Sausage Rigatoni Bowls",
-    category: "Dinner",
-    calories: 362,
-    protein: 31,
-    carbs: 29,
-    fat: 14,
-    ingredients: [
-      "dry pasta",
-      "lean italian sausage or beef",
-      "marinara or vodka sauce",
-      "cottage cheese",
-      "parmesan",
-      "mozzarella",
-      "green vegetable"
-    ],
-    ingredientTags: ["pasta", "sausage", "beef", "cheese"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "street-corn-queso-bowl",
-    profileId: "shared",
-    name: "Street Corn Queso Bowl",
-    category: "Lunch",
-    calories: 289,
-    protein: 42,
-    carbs: 14,
-    fat: 8,
-    ingredients: [
-      "chicken",
-      "fire roasted corn",
-      "laughing cow cheese",
-      "cottage cheese or greek yogurt",
-      "fajita seasoning",
-      "shredded cheese"
-    ],
-    ingredientTags: ["chicken", "corn", "queso"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "white-chicken-enchilada-casserole-bowl",
-    profileId: "shared",
-    name: "White Chicken Enchilada Casserole Bowl",
-    category: "Dinner",
-    calories: 287,
-    protein: 37,
-    carbs: 4,
-    fat: 12,
-    ingredients: [
-      "salsa verde",
-      "zero net carb mini tortillas",
-      "chicken",
-      "shredded cheese",
-      "greek yogurt",
-      "fajita seasoning",
-      "queso"
-    ],
-    ingredientTags: ["chicken", "enchilada", "queso"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "wicked-chicken-wrap",
-    profileId: "shared",
-    name: "Wicked Chicken Wrap",
-    category: "Lunch",
-    calories: 244,
-    protein: 24,
-    carbs: 36,
-    fat: 6,
-    ingredients: [
-      "low carb tortilla",
-      "chicken",
-      "hot sauce",
-      "honey",
-      "ranch seasoning",
-      "shredded lettuce",
-      "diced pickles"
-    ],
-    ingredientTags: ["wrap", "chicken", "spicy"],
-    notes: "FlavorFULL version"
-  },
 
-    {
-    id: "bbq-bacon-cheeseburger-bowls",
-    profileId: "shared",
-    name: "BBQ Bacon Cheeseburger Bowls",
-    category: "Dinner",
-    calories: 315,
-    protein: 30,
-    carbs: 20,
-    fat: 11,
-    ingredients: [
-      "russet potatoes",
-      "lean ground beef",
-      "yellow onion",
-      "bacon bits",
-      "bbq sauce",
-      "chipotle sauce",
-      "shredded cheese",
-      "french fried onions"
-    ],
-    ingredientTags: ["beef", "potato", "bbq", "bacon", "cheeseburger"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "chili-mac-bowls",
-    profileId: "shared",
-    name: "Chili Mac Bowls",
-    category: "Dinner",
-    calories: 383,
-    protein: 37,
-    carbs: 25,
-    fat: 14,
-    ingredients: [
-      "dry pasta",
-      "laughing cow cheese",
-      "shredded cheese",
-      "lean ground beef",
-      "chili seasoning",
-      "beef bone broth",
-      "tomato sauce",
-      "chili beans"
-    ],
-    ingredientTags: ["beef", "pasta", "chili", "cheese"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "crispy-chipotle-chicken-wrap",
-    profileId: "shared",
-    name: "Crispy Chipotle Chicken Wrap",
-    category: "Lunch",
-    calories: 294,
-    protein: 28,
-    carbs: 31,
-    fat: 8,
-    ingredients: [
-      "low carb tortilla",
-      "chicken",
-      "bbq sauce",
-      "chipotle sauce",
-      "bacon bits",
-      "red onion",
-      "lettuce",
-      "banana peppers"
-    ],
-    ingredientTags: ["wrap", "chicken", "chipotle", "bbq"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "garlic-parm-stuffed-flatbread",
-    profileId: "shared",
-    name: "Garlic Parm Stuffed Flatbread",
-    category: "Lunch",
-    calories: 351,
-    protein: 38,
-    carbs: 30,
-    fat: 13,
-    ingredients: [
-      "low carb tortillas",
-      "laughing cow cheese",
-      "chicken",
-      "bacon bits",
-      "onion",
-      "parmesan garlic sauce",
-      "shredded cheese",
-      "mozzarella"
-    ],
-    ingredientTags: ["flatbread", "chicken", "garlic", "parmesan", "bacon"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "honey-butter-chicken-bowls",
-    profileId: "shared",
-    name: "Honey Butter Chicken Bowls",
-    category: "Dinner",
-    calories: 325,
-    protein: 27,
-    carbs: 31,
-    fat: 11,
-    ingredients: [
-      "instant mashed potatoes",
-      "cauliflower rice",
-      "chicken",
-      "bbq seasoning",
-      "butter",
-      "honey",
-      "soy sauce",
-      "garlic",
-      "green vegetable"
-    ],
-    ingredientTags: ["chicken", "potato", "honey", "butter"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "orange-chicken-bowls",
-    profileId: "shared",
-    name: "Orange Chicken Bowls",
-    category: "Dinner",
-    calories: 365,
-    protein: 29,
-    carbs: 59,
-    fat: 1,
-    ingredients: [
-      "chicken",
-      "orange sauce",
-      "bbq sauce",
-      "dry pasta",
-      "soy sauce",
-      "garlic",
-      "ginger",
-      "broccoli",
-      "carrots",
-      "cabbage"
-    ],
-    ingredientTags: ["chicken", "orange", "pasta", "asian"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "pizza-lunchable",
-    profileId: "shared",
-    name: "Pizza Lunchable",
-    category: "Lunch",
-    calories: 263,
-    protein: 16,
-    carbs: 31,
-    fat: 10,
-    ingredients: [
-      "mini naan or pita",
-      "mozzarella",
-      "turkey pepperoni",
-      "marinara"
-    ],
-    ingredientTags: ["pizza", "lunchable", "pepperoni"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "southwestern-pinwheels",
-    profileId: "shared",
-    name: "Southwestern Pinwheels",
-    category: "Lunch",
-    calories: 270,
-    protein: 31,
-    carbs: 15,
-    fat: 10,
-    ingredients: [
-      "low carb tortilla",
-      "chicken",
-      "laughing cow cheese",
-      "fajita seasoning",
-      "pico",
-      "shredded mexican cheese",
-      "chipotle or southwestern ranch sauce"
-    ],
-    ingredientTags: ["pinwheels", "chicken", "southwestern", "tortilla"],
-    notes: "FlavorFULL version"
-  },
   {
     id: "sweet-chili-chicken-wrap",
     profileId: "shared",
@@ -657,169 +405,15 @@ const DEFAULT_SHARED_RECIPES = [
     fat: 5,
     ingredients: [
       "low carb tortilla",
-      "light cream cheese",
-      "everything bagel seasoning",
       "chicken",
       "sweet chili sauce",
       "cucumber",
-      "shredded carrots"
+      "carrots"
     ],
-    ingredientTags: ["wrap", "chicken", "sweet chili"],
-    notes: "FlavorFULL version"
-  },
-    {
-    id: "cowboy-butter-bowls",
-    profileId: "shared",
-    name: "Cowboy Butter Bowls",
-    category: "Dinner",
-    calories: 288,
-    protein: 28,
-    carbs: 26,
-    fat: 9,
-    ingredients: [
-      "instant mashed potatoes",
-      "cauliflower rice",
-      "chicken",
-      "cowboy butter seasoning",
-      "butter",
-      "garlic",
-      "milk or chicken broth",
-      "light cream cheese",
-      "green vegetable"
-    ],
-    ingredientTags: ["chicken", "potato", "cowboy butter", "creamy"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "garlic-parm-stuffed-flatbread",
-    profileId: "shared",
-    name: "Garlic Parm Stuffed Flatbread",
-    category: "Lunch",
-    calories: 351,
-    protein: 38,
-    carbs: 30,
-    fat: 13,
-    ingredients: [
-      "low carb tortillas",
-      "laughing cow cheese",
-      "chicken",
-      "bacon bits",
-      "onion",
-      "parmesan garlic sauce",
-      "shredded cheese",
-      "mozzarella"
-    ],
-    ingredientTags: ["flatbread", "chicken", "garlic", "parmesan", "bacon"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "nashville-hot-loaded-fries",
-    profileId: "shared",
-    name: "Nashville Hot Loaded Fries",
-    category: "Dinner",
-    calories: 311,
-    protein: 29,
-    carbs: 36,
-    fat: 4,
-    ingredients: [
-      "russet potatoes",
-      "chicken",
-      "hot sauce",
-      "honey",
-      "shredded cheese",
-      "greek yogurt",
-      "ranch seasoning",
-      "pickles"
-    ],
-    ingredientTags: ["chicken", "fries", "spicy", "nashville"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "pizza-lunchable",
-    profileId: "shared",
-    name: "Pizza Lunchable",
-    category: "Lunch",
-    calories: 263,
-    protein: 16,
-    carbs: 31,
-    fat: 10,
-    ingredients: [
-      "mini naan or pita",
-      "mozzarella",
-      "turkey pepperoni",
-      "marinara"
-    ],
-    ingredientTags: ["pizza", "lunchable", "pepperoni"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "shredded-bbq-chicken-bowls",
-    profileId: "shared",
-    name: "Shredded BBQ Chicken Bowls",
-    category: "Dinner",
-    calories: 264,
-    protein: 28,
-    carbs: 24,
-    fat: 6,
-    ingredients: [
-      "chicken",
-      "bbq seasoning",
-      "bbq sauce",
-      "mac and cheese cups",
-      "laughing cow cheese",
-      "cottage cheese",
-      "shredded cheese",
-      "green vegetable"
-    ],
-    ingredientTags: ["chicken", "bbq", "mac and cheese"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "sweet-chili-chicken-wrap",
-    profileId: "shared",
-    name: "Sweet Chili Chicken Wrap",
-    category: "Lunch",
-    calories: 228,
-    protein: 28,
-    carbs: 20,
-    fat: 5,
-    ingredients: [
-      "low carb tortilla",
-      "light cream cheese",
-      "everything bagel seasoning",
-      "chicken",
-      "sweet chili sauce",
-      "cucumber",
-      "shredded carrots"
-    ],
-    ingredientTags: ["wrap", "chicken", "sweet chili"],
-    notes: "FlavorFULL version"
-  },
-  {
-    id: "teriyaki-beef-bowl-no-rice",
-    profileId: "shared",
-    name: "Teriyaki Beef Bowl (No Rice)",
-    category: "Dinner",
-    calories: 235,
-    protein: 28,
-    carbs: 8,
-    fat: 9,
-    ingredients: [
-      "lean ground beef",
-      "garlic",
-      "pepper",
-      "ground ginger",
-      "soy sauce",
-      "teriyaki sauce",
-      "avocado",
-      "shredded carrots",
-      "cabbage mix",
-      "light yum yum sauce",
-      "wonton strips"
-    ],
-    ingredientTags: ["beef", "teriyaki", "asian", "low-carb"],
-    notes: "Rice removed from FlavorFULL teriyaki beef bowl"
+    ingredientTags: ["wrap","chicken"],
+    notes: ""
   }
+
 ];
 
 function today() {
