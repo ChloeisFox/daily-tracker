@@ -470,6 +470,202 @@ const DEFAULT_SHARED_RECIPES = [
     ],
     ingredientTags: ["wrap", "chicken", "spicy"],
     notes: "FlavorFULL version"
+  },
+
+    {
+    id: "bbq-bacon-cheeseburger-bowls",
+    profileId: "shared",
+    name: "BBQ Bacon Cheeseburger Bowls",
+    category: "Dinner",
+    calories: 315,
+    protein: 30,
+    carbs: 20,
+    fat: 11,
+    ingredients: [
+      "russet potatoes",
+      "lean ground beef",
+      "yellow onion",
+      "bacon bits",
+      "bbq sauce",
+      "chipotle sauce",
+      "shredded cheese",
+      "french fried onions"
+    ],
+    ingredientTags: ["beef", "potato", "bbq", "bacon", "cheeseburger"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "chili-mac-bowls",
+    profileId: "shared",
+    name: "Chili Mac Bowls",
+    category: "Dinner",
+    calories: 383,
+    protein: 37,
+    carbs: 25,
+    fat: 14,
+    ingredients: [
+      "dry pasta",
+      "laughing cow cheese",
+      "shredded cheese",
+      "lean ground beef",
+      "chili seasoning",
+      "beef bone broth",
+      "tomato sauce",
+      "chili beans"
+    ],
+    ingredientTags: ["beef", "pasta", "chili", "cheese"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "crispy-chipotle-chicken-wrap",
+    profileId: "shared",
+    name: "Crispy Chipotle Chicken Wrap",
+    category: "Lunch",
+    calories: 294,
+    protein: 28,
+    carbs: 31,
+    fat: 8,
+    ingredients: [
+      "low carb tortilla",
+      "chicken",
+      "bbq sauce",
+      "chipotle sauce",
+      "bacon bits",
+      "red onion",
+      "lettuce",
+      "banana peppers"
+    ],
+    ingredientTags: ["wrap", "chicken", "chipotle", "bbq"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "garlic-parm-stuffed-flatbread",
+    profileId: "shared",
+    name: "Garlic Parm Stuffed Flatbread",
+    category: "Lunch",
+    calories: 351,
+    protein: 38,
+    carbs: 30,
+    fat: 13,
+    ingredients: [
+      "low carb tortillas",
+      "laughing cow cheese",
+      "chicken",
+      "bacon bits",
+      "onion",
+      "parmesan garlic sauce",
+      "shredded cheese",
+      "mozzarella"
+    ],
+    ingredientTags: ["flatbread", "chicken", "garlic", "parmesan", "bacon"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "honey-butter-chicken-bowls",
+    profileId: "shared",
+    name: "Honey Butter Chicken Bowls",
+    category: "Dinner",
+    calories: 325,
+    protein: 27,
+    carbs: 31,
+    fat: 11,
+    ingredients: [
+      "instant mashed potatoes",
+      "cauliflower rice",
+      "chicken",
+      "bbq seasoning",
+      "butter",
+      "honey",
+      "soy sauce",
+      "garlic",
+      "green vegetable"
+    ],
+    ingredientTags: ["chicken", "potato", "honey", "butter"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "orange-chicken-bowls",
+    profileId: "shared",
+    name: "Orange Chicken Bowls",
+    category: "Dinner",
+    calories: 365,
+    protein: 29,
+    carbs: 59,
+    fat: 1,
+    ingredients: [
+      "chicken",
+      "orange sauce",
+      "bbq sauce",
+      "dry pasta",
+      "soy sauce",
+      "garlic",
+      "ginger",
+      "broccoli",
+      "carrots",
+      "cabbage"
+    ],
+    ingredientTags: ["chicken", "orange", "pasta", "asian"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "pizza-lunchable",
+    profileId: "shared",
+    name: "Pizza Lunchable",
+    category: "Lunch",
+    calories: 263,
+    protein: 16,
+    carbs: 31,
+    fat: 10,
+    ingredients: [
+      "mini naan or pita",
+      "mozzarella",
+      "turkey pepperoni",
+      "marinara"
+    ],
+    ingredientTags: ["pizza", "lunchable", "pepperoni"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "southwestern-pinwheels",
+    profileId: "shared",
+    name: "Southwestern Pinwheels",
+    category: "Lunch",
+    calories: 270,
+    protein: 31,
+    carbs: 15,
+    fat: 10,
+    ingredients: [
+      "low carb tortilla",
+      "chicken",
+      "laughing cow cheese",
+      "fajita seasoning",
+      "pico",
+      "shredded mexican cheese",
+      "chipotle or southwestern ranch sauce"
+    ],
+    ingredientTags: ["pinwheels", "chicken", "southwestern", "tortilla"],
+    notes: "FlavorFULL version"
+  },
+  {
+    id: "sweet-chili-chicken-wrap",
+    profileId: "shared",
+    name: "Sweet Chili Chicken Wrap",
+    category: "Lunch",
+    calories: 228,
+    protein: 28,
+    carbs: 20,
+    fat: 5,
+    ingredients: [
+      "low carb tortilla",
+      "light cream cheese",
+      "everything bagel seasoning",
+      "chicken",
+      "sweet chili sauce",
+      "cucumber",
+      "shredded carrots"
+    ],
+    ingredientTags: ["wrap", "chicken", "sweet chili"],
+    notes: "FlavorFULL version"
   }
 ];
 
