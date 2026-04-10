@@ -1,5 +1,305 @@
 const app = window.dailyTracker;
 
+const DEFAULT_SHARED_RECIPES = [
+  {
+    id: "beef-enchilada-bowl",
+    profileId: "shared",
+    name: "Beef Enchilada Bowl (No Rice)",
+    category: "Dinner",
+    calories: 257,
+    protein: 32,
+    carbs: 8,
+    fat: 10,
+    ingredients: [
+      "lean ground beef",
+      "refried beans",
+      "enchilada sauce",
+      "queso",
+      "shredded cheese",
+      "pico"
+    ],
+    ingredientTags: ["beef", "mexican", "cheese", "sauce"],
+    notes: "Rice removed"
+  },
+  {
+    id: "big-mac-bowl",
+    profileId: "shared",
+    name: "Big Mac Bowl (No Rice)",
+    category: "Dinner",
+    calories: 256,
+    protein: 27,
+    carbs: 4,
+    fat: 14,
+    ingredients: [
+      "ground beef",
+      "lettuce",
+      "pickles",
+      "onion",
+      "cheese",
+      "burger sauce"
+    ],
+    ingredientTags: ["beef", "low-carb", "burger"],
+    notes: "Rice removed"
+  },
+  {
+    id: "buffalo-chicken-quesadilla",
+    profileId: "shared",
+    name: "Buffalo Chicken Quesadilla",
+    category: "Lunch",
+    calories: 290,
+    protein: 38,
+    carbs: 5,
+    fat: 12,
+    ingredients: [
+      "low carb tortilla",
+      "canned chicken",
+      "cream cheese spread",
+      "buffalo sauce",
+      "shredded cheese"
+    ],
+    ingredientTags: ["tortilla", "chicken", "cheese", "buffalo"],
+    notes: ""
+  },
+  {
+    id: "burrito-bowl",
+    profileId: "shared",
+    name: "Burrito Bowl (No Rice)",
+    category: "Dinner",
+    calories: 210,
+    protein: 26,
+    carbs: 6,
+    fat: 9,
+    ingredients: [
+      "ground beef",
+      "refried beans",
+      "queso",
+      "cheese",
+      "pico"
+    ],
+    ingredientTags: ["beef", "mexican"],
+    notes: "Rice removed"
+  },
+  {
+    id: "chicken-alfredo-bowl",
+    profileId: "shared",
+    name: "Chicken Alfredo Bowl",
+    category: "Dinner",
+    calories: 360,
+    protein: 32,
+    carbs: 35,
+    fat: 8,
+    ingredients: [
+      "chicken",
+      "pasta",
+      "alfredo sauce",
+      "broccoli",
+      "cheese"
+    ],
+    ingredientTags: ["chicken", "pasta"],
+    notes: ""
+  },
+  {
+    id: "chicken-enchilada-bowl",
+    profileId: "shared",
+    name: "Chicken Enchilada Bowl (No Rice)",
+    category: "Dinner",
+    calories: 220,
+    protein: 30,
+    carbs: 7,
+    fat: 6,
+    ingredients: [
+      "chicken",
+      "black beans",
+      "enchilada sauce",
+      "queso",
+      "cheese"
+    ],
+    ingredientTags: ["chicken", "mexican"],
+    notes: "Rice removed"
+  },
+  {
+    id: "chicken-parm-bowl",
+    profileId: "shared",
+    name: "Chicken Parm Bowl",
+    category: "Dinner",
+    calories: 364,
+    protein: 32,
+    carbs: 38,
+    fat: 6,
+    ingredients: [
+      "chicken",
+      "pasta",
+      "marinara",
+      "cheese",
+      "broccoli"
+    ],
+    ingredientTags: ["chicken", "pasta"],
+    notes: ""
+  },
+  {
+    id: "chicken-teriyaki-bowl",
+    profileId: "shared",
+    name: "Chicken Teriyaki Bowl (No Rice)",
+    category: "Dinner",
+    calories: 180,
+    protein: 28,
+    carbs: 10,
+    fat: 3,
+    ingredients: [
+      "chicken",
+      "broccoli",
+      "teriyaki sauce"
+    ],
+    ingredientTags: ["chicken", "asian"],
+    notes: "Rice removed"
+  },
+  {
+    id: "egg-roll-bowl",
+    profileId: "shared",
+    name: "Egg Roll Bowl (No Rice)",
+    category: "Dinner",
+    calories: 220,
+    protein: 25,
+    carbs: 8,
+    fat: 12,
+    ingredients: [
+      "ground beef",
+      "cabbage",
+      "carrots",
+      "soy sauce",
+      "teriyaki sauce"
+    ],
+    ingredientTags: ["beef", "low-carb"],
+    notes: "Rice removed"
+  },
+  {
+    id: "fajita-bowl",
+    profileId: "shared",
+    name: "Fajita Bowl (No Rice)",
+    category: "Dinner",
+    calories: 200,
+    protein: 28,
+    carbs: 6,
+    fat: 7,
+    ingredients: [
+      "chicken",
+      "bell peppers",
+      "onion",
+      "queso"
+    ],
+    ingredientTags: ["chicken", "mexican"],
+    notes: "Rice removed"
+  },
+  {
+    id: "lasagna-bowl",
+    profileId: "shared",
+    name: "Lasagna Bowl",
+    category: "Dinner",
+    calories: 423,
+    protein: 26,
+    carbs: 36,
+    fat: 19,
+    ingredients: [
+      "pasta",
+      "ground beef",
+      "marinara",
+      "cheese"
+    ],
+    ingredientTags: ["pasta", "beef"],
+    notes: ""
+  },
+  {
+    id: "lettuce-wrap-bowl",
+    profileId: "shared",
+    name: "Lettuce Wrap Bowl",
+    category: "Lunch",
+    calories: 284,
+    protein: 27,
+    carbs: 15,
+    fat: 16,
+    ingredients: [
+      "ground chicken",
+      "lettuce",
+      "teriyaki sauce",
+      "peanut sauce"
+    ],
+    ingredientTags: ["low-carb", "chicken"],
+    notes: ""
+  },
+  {
+    id: "mcchicken-sandwich",
+    profileId: "shared",
+    name: "McChicken Sandwich",
+    category: "Lunch",
+    calories: 450,
+    protein: 30,
+    carbs: 40,
+    fat: 18,
+    ingredients: [
+      "low calorie bun",
+      "crispy chicken",
+      "lettuce",
+      "mayo"
+    ],
+    ingredientTags: ["chicken", "sandwich"],
+    notes: ""
+  },
+  {
+    id: "mcchicken-wrap",
+    profileId: "shared",
+    name: "McChicken Wrap",
+    category: "Lunch",
+    calories: 400,
+    protein: 30,
+    carbs: 32,
+    fat: 16,
+    ingredients: [
+      "low carb tortilla",
+      "crispy chicken",
+      "lettuce",
+      "mayo"
+    ],
+    ingredientTags: ["wrap", "chicken"],
+    notes: ""
+  },
+  {
+    id: "million-dollar-pasta",
+    profileId: "shared",
+    name: "Million Dollar Pasta",
+    category: "Dinner",
+    calories: 420,
+    protein: 35,
+    carbs: 42,
+    fat: 16,
+    ingredients: [
+      "pasta",
+      "ground beef",
+      "cheese",
+      "sauce"
+    ],
+    ingredientTags: ["pasta", "beef"],
+    notes: ""
+  },
+  {
+    id: "pesto-quesadilla",
+    profileId: "shared",
+    name: "Pesto Quesadilla",
+    category: "Lunch",
+    calories: 360,
+    protein: 28,
+    carbs: 26,
+    fat: 16,
+    ingredients: [
+      "low carb tortilla",
+      "chicken",
+      "pesto",
+      "cheese"
+    ],
+    ingredientTags: ["tortilla", "chicken"],
+    notes: ""
+  }
+];
+
 function recipeCollectionName() {
   return app.collections?.recipes || 'recipes';
 }
@@ -17,12 +317,30 @@ function normalizeIngredientTags(ingredients) {
       .flatMap((line) =>
         String(line)
           .toLowerCase()
-          .replace(/[^a-z0-9\s]/g, ' ')
+          .replace(/[^a-z0-9\s-]/g, ' ')
           .split(/\s+/)
       )
       .map((word) => word.trim())
       .filter((word) => word.length > 2)
   )];
+}
+
+async function ensureDefaultSharedRecipes() {
+  const existingRecipes = await app.db.list(recipeCollectionName(), { profileId: 'shared' });
+
+  if (existingRecipes.length > 0) {
+    return;
+  }
+
+  for (const recipe of DEFAULT_SHARED_RECIPES) {
+    await app.db.upsert(recipeCollectionName(), recipe.id, {
+      ...recipe,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    });
+  }
+
+  console.log('Default shared recipes imported to Firestore.');
 }
 
 function fillRecipeForm(recipe) {
@@ -173,14 +491,22 @@ function installRecipeForm() {
       ingredients,
       ingredientTags: normalizeIngredientTags(ingredients),
       notes: document.getElementById('recipeNotes').value.trim(),
-      createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
 
-    await app.db.upsert(recipeCollectionName(), payload.id, payload);
-    clearRecipeForm();
-    await loadRecipes();
-    alert(existingId ? 'Recipe updated.' : 'Recipe saved for both profiles.');
+    try {
+      if (!existingId) {
+        payload.createdAt = new Date().toISOString();
+      }
+
+      await app.db.upsert(recipeCollectionName(), payload.id, payload);
+      clearRecipeForm();
+      await loadRecipes();
+      alert(existingId ? 'Recipe updated.' : 'Recipe saved for both profiles.');
+    } catch (error) {
+      console.error('Recipe save failed:', error);
+      alert(`Recipe save failed: ${error.message || error}`);
+    }
   });
 
   document.getElementById('clearRecipeForm')?.addEventListener('click', clearRecipeForm);
@@ -194,6 +520,7 @@ function installFilters() {
 async function init() {
   await app.ensureApp();
   app.requireProfile();
+  await ensureDefaultSharedRecipes();
   installRecipeForm();
   installFilters();
   await loadRecipes();
