@@ -19,5 +19,6 @@ export const collections = {
   settings: "settings",
   meals: "meals",
   weights: "weights",
-  workouts: "workouts"
+  workouts: "workouts",
+  recipes: "recipes"
 };

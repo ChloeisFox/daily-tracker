@@ -182,5 +182,41 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if false;
     }
-  }
+
+
+function validRecipe() {
+  return request.resource.data.keys().hasOnly([
+    "id",
+    "profileId",
+    "name",
+    "category",
+    "servingSize",
+    "calories",
+    "protein",
+    "carbs",
+    "fat",
+    "notes",
+    "ingredients",
+    "createdAt",
+    "updatedAt"
+  ]) &&
+  validProfileId(request.resource.data.profileId) &&
+  isOptionalString(request.resource.data.name) &&
+  isOptionalString(request.resource.data.category) &&
+  isOptionalString(request.resource.data.servingSize) &&
+  isOptionalNumber(request.resource.data.calories) &&
+  isOptionalNumber(request.resource.data.protein) &&
+  isOptionalNumber(request.resource.data.carbs) &&
+  isOptionalNumber(request.resource.data.fat) &&
+  isOptionalString(request.resource.data.notes) &&
+  (!("ingredients" in request.resource.data) || request.resource.data.ingredients is list) &&
+  isOptionalString(request.resource.data.createdAt) &&
+  isOptionalString(request.resource.data.updatedAt);
+}
+
+match /recipes/{docId} {
+  allow read: if true;
+  allow create, update: if validRecipe();
+  allow delete: if true;
+}  }
 }
