@@ -148,9 +148,12 @@ const db = {
 };
 
 const helpers = {
-  today() {
-    return new Date().toISOString().slice(0, 10);
-  },
+today() {
+  const now = new Date();
+  const offset = now.getTimezoneOffset();
+  const local = new Date(now.getTime() - offset * 60 * 1000);
+  return local.toISOString().slice(0, 10);
+},
 
   formatDate(dateString) {
     if (!dateString) return '--';
