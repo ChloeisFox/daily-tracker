@@ -78,12 +78,15 @@ button:active, a:active { transform: scale(0.98); }
 
 .profile-grid, .card-grid { display: grid; gap: 12px; }
 .profile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 18px; }
-.profile-tile, .action-card {
+.profile-card, .action-card {
   padding: 16px;
   border-radius: 22px;
   background: var(--surface-strong);
+  border: 1px solid var(--line);
+  color: var(--text);
+  cursor: pointer;
 }
-.profile-tile.active { outline: 2px solid var(--primary); }
+.profile-card.active { outline: 2px solid var(--primary); }
 .profile-avatar {
   width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
   background: linear-gradient(135deg, var(--blue) 0%, var(--pink) 100%); color: white; font-weight: 700;
@@ -150,4 +153,43 @@ body.theme-dark .bottom-nav { background: rgba(19, 13, 26, 0.9); }
 @media (max-width: 420px) {
   body { padding: 14px; }
   .profile-grid, .card-grid.two-up, .summary-stats.two-col, .split-grid, .split-grid.three-col { grid-template-columns: 1fr; }
+}
+
+body.theme-light,
+body.theme-dark {
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+body.theme-light .page-header,
+body.theme-light .panel-card,
+body.theme-light .hero-card,
+body.theme-light .glass-card,
+body.theme-light .action-card,
+body.theme-light .card-soft,
+body.theme-light .bottom-nav,
+body.theme-light .profile-card,
+body.theme-light .mini-stat,
+body.theme-light .list-item,
+body.theme-light .summary-row,
+body.theme-light .calendar-cell,
+body.theme-light .empty-state,
+body.theme-light .inline-actions button {
+  color: var(--text);
+}
+
+body.theme-dark .page-header,
+body.theme-dark .panel-card,
+body.theme-dark .hero-card,
+body.theme-dark .glass-card,
+body.theme-dark .action-card,
+body.theme-dark .card-soft,
+body.theme-dark .bottom-nav,
+body.theme-dark .profile-card,
+body.theme-dark .mini-stat,
+body.theme-dark .list-item,
+body.theme-dark .summary-row,
+body.theme-dark .calendar-cell,
+body.theme-dark .empty-state,
+body.theme-dark .inline-actions button {
+  color: var(--text);
 }
