@@ -188,7 +188,10 @@ function installWorkoutForm() {
     event.preventDefault();
 
     const profile = app.getCurrentProfile();
-    const date = document.getElementById('workoutDate')?.value || document.getElementById('entryDate')?.value || today();
+    const date =
+      document.getElementById('workoutDate')?.value ||
+      document.getElementById('entryDate')?.value ||
+      today();
 
     const payload = {
       id: crypto.randomUUID(),
@@ -202,9 +205,11 @@ function installWorkoutForm() {
     };
 
     try {
+      console.log('Saving workout:', payload);
       await app.db.create('workouts', payload);
       form.reset();
-      document.getElementById('workoutDate').value = document.getElementById('entryDate')?.value || today();
+      document.getElementById('workoutDate').value =
+        document.getElementById('entryDate')?.value || today();
       await loadEntrySummary();
       alert('Workout saved.');
     } catch (error) {
