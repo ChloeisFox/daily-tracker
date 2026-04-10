@@ -35,7 +35,15 @@
           <h2>Add meal</h2>
         </div>
       </div>
+
       <form id="mealForm" class="stack-lg">
+        <div>
+          <label for="savedRecipeSelect">Saved recipe</label>
+          <select id="savedRecipeSelect">
+            <option value="">Choose a saved recipe</option>
+          </select>
+        </div>
+
         <div class="split-grid">
           <div>
             <label for="mealType">Meal type</label>
@@ -51,10 +59,12 @@
             <input id="mealName" type="text" placeholder="Chicken salad, smoothie, taco..." />
           </div>
         </div>
+
         <div>
           <label for="mealCalories">Total calories</label>
           <input id="mealCalories" type="number" min="0" step="1" placeholder="Calories for this meal" required />
         </div>
+
         <div class="split-grid three-col">
           <div>
             <label for="mealProtein">Protein (g)</label>
@@ -69,10 +79,12 @@
             <input id="mealFat" type="number" min="0" step="0.1" placeholder="Optional" />
           </div>
         </div>
+
         <div>
           <label for="mealNotes">Notes</label>
           <textarea id="mealNotes" rows="3" placeholder="Optional ingredients, portions, or notes"></textarea>
         </div>
+
         <button class="primary-button" type="submit">Save meal</button>
       </form>
     </section>
@@ -84,15 +96,18 @@
           <h2>Add weigh-in</h2>
         </div>
       </div>
+
       <form id="weightForm" class="stack-lg">
+        <div>
+          <label for="weightDate">Date</label>
+          <input id="weightDate" type="date" />
+        </div>
+
         <div>
           <label for="weightValue">Weight</label>
           <input id="weightValue" type="number" min="0" step="0.1" placeholder="Example: 182.4" required />
         </div>
-        <div>
-          <label for="weightNotes">Notes</label>
-          <textarea id="weightNotes" rows="2" placeholder="Optional note"></textarea>
-        </div>
+
         <button class="primary-button" type="submit">Save weight</button>
       </form>
     </section>
@@ -104,25 +119,34 @@
           <h2>Add workout</h2>
         </div>
       </div>
+
       <form id="workoutForm" class="stack-lg">
+        <div>
+          <label for="workoutDate">Date</label>
+          <input id="workoutDate" type="date" />
+        </div>
+
         <div class="split-grid">
           <div>
             <label for="workoutType">Workout type</label>
             <input id="workoutType" type="text" placeholder="Walk, strength, yoga..." required />
           </div>
           <div>
-            <label for="workoutMinutesInput">Minutes</label>
-            <input id="workoutMinutesInput" type="number" min="0" step="1" placeholder="30" required />
+            <label for="workoutMinutes">Minutes</label>
+            <input id="workoutMinutes" type="number" min="0" step="1" placeholder="30" required />
           </div>
         </div>
+
         <div>
-          <label for="workoutCalories">Calories burned</label>
-          <input id="workoutCalories" type="number" min="0" step="1" placeholder="Optional, but recommended" />
+          <label for="workoutCaloriesBurned">Calories burned</label>
+          <input id="workoutCaloriesBurned" type="number" min="0" step="1" placeholder="Optional, but recommended" />
         </div>
+
         <div>
           <label for="workoutNotes">Notes</label>
           <textarea id="workoutNotes" rows="3" placeholder="Optional notes"></textarea>
         </div>
+
         <button class="primary-button" type="submit">Save workout</button>
       </form>
     </section>

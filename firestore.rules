@@ -41,8 +41,8 @@ service cloud.firestore {
           "proteinTarget",
           "weighInDays"
         ]) &&
-        (!("startWeight" in goals) || isOptionalNumber(goals.startWeight)) &&
-        (!("goalWeight" in goals) || isOptionalNumber(goals.goalWeight)) &&
+        (!("startWeight" in goals) || isOptionalNumber(goals.startWeight) || goals.startWeight == "") &&
+        (!("goalWeight" in goals) || isOptionalNumber(goals.goalWeight) || goals.goalWeight == "") &&
         (!("calorieTarget" in goals) || isOptionalNumber(goals.calorieTarget)) &&
         (!("proteinTarget" in goals) || isOptionalNumber(goals.proteinTarget)) &&
         (!("weighInDays" in goals) || isOptionalNumber(goals.weighInDays))
@@ -149,6 +149,36 @@ service cloud.firestore {
       isOptionalString(request.resource.data.updatedAt);
     }
 
+    function validRecipe() {
+      return request.resource.data.keys().hasOnly([
+        "id",
+        "profileId",
+        "name",
+        "category",
+        "servingSize",
+        "calories",
+        "protein",
+        "carbs",
+        "fat",
+        "notes",
+        "ingredients",
+        "createdAt",
+        "updatedAt"
+      ]) &&
+      validProfileId(request.resource.data.profileId) &&
+      isOptionalString(request.resource.data.name) &&
+      isOptionalString(request.resource.data.category) &&
+      isOptionalString(request.resource.data.servingSize) &&
+      isOptionalNumber(request.resource.data.calories) &&
+      isOptionalNumber(request.resource.data.protein) &&
+      isOptionalNumber(request.resource.data.carbs) &&
+      isOptionalNumber(request.resource.data.fat) &&
+      isOptionalString(request.resource.data.notes) &&
+      (!("ingredients" in request.resource.data) || request.resource.data.ingredients is list) &&
+      isOptionalString(request.resource.data.createdAt) &&
+      isOptionalString(request.resource.data.updatedAt);
+    }
+
     match /profiles/{docId} {
       allow read: if true;
       allow create, update: if validProfile();
@@ -179,44 +209,14 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    match /recipes/{docId} {
+      allow read: if true;
+      allow create, update: if validRecipe();
+      allow delete: if true;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }
-
-
-function validRecipe() {
-  return request.resource.data.keys().hasOnly([
-    "id",
-    "profileId",
-    "name",
-    "category",
-    "servingSize",
-    "calories",
-    "protein",
-    "carbs",
-    "fat",
-    "notes",
-    "ingredients",
-    "createdAt",
-    "updatedAt"
-  ]) &&
-  validProfileId(request.resource.data.profileId) &&
-  isOptionalString(request.resource.data.name) &&
-  isOptionalString(request.resource.data.category) &&
-  isOptionalString(request.resource.data.servingSize) &&
-  isOptionalNumber(request.resource.data.calories) &&
-  isOptionalNumber(request.resource.data.protein) &&
-  isOptionalNumber(request.resource.data.carbs) &&
-  isOptionalNumber(request.resource.data.fat) &&
-  isOptionalString(request.resource.data.notes) &&
-  (!("ingredients" in request.resource.data) || request.resource.data.ingredients is list) &&
-  isOptionalString(request.resource.data.createdAt) &&
-  isOptionalString(request.resource.data.updatedAt);
-}
-
-match /recipes/{docId} {
-  allow read: if true;
-  allow create, update: if validRecipe();
-  allow delete: if true;
-}  }
+  }
 }
