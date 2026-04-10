@@ -1,29 +1,34 @@
-const CACHE_NAME = 'daily-tracker-v1';
-const ASSETS = [
-  './',
-  './index.html',
-  './dashboard.html',
-  './entry.html',
-  './calendar.html',
-  './progress.html',
-  './settings.html',
-  './css/styles.css',
-  './css/themes.css',
-  './js/app.js',
-  './js/auth.js',
-  './js/dashboard.js',
-  './js/entry.js',
-  './js/calendar.js',
-  './js/progress.js',
-  './js/settings.js',
-  './js/firebase-config.js',
-  './manifest.json'
-];
+const CACHE_NAME = 'daily-tracker-v2'; // <-- bump version when you update app
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      )
+    )
+  );
+  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
-  event.respondWith(caches.match(event.request).then((response) => response || fetch(event.request)));
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, clone);
+        });
+        return response;
+      })
+      .catch(() => caches.match(event.request))
+  );
 });
