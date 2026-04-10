@@ -2,7 +2,7 @@ import { firebaseSettings, collections } from './firebase-config.js';
 
 const STARTER_PROFILES = [
   { id: 'chloe', name: 'Chloe', pin: '5629', createdAt: new Date().toISOString(), theme: 'light', goals: { startWeight: '', goalWeight: '', calorieTarget: 1800, proteinTarget: 100, weighInDays: 5 } },
-  { id: 'isa', name: 'Isa', pin: '1025', createdAt: new Date().toISOString(), theme: 'light', goals: { startWeight: '', goalWeight: '', calorieTarget: 1800, proteinTarget: 100, weighInDays: 5 } }
+  { id: 'isa', name: 'Isa', pin: '2525', createdAt: new Date().toISOString(), theme: 'light', goals: { startWeight: '', goalWeight: '', calorieTarget: 1800, proteinTarget: 100, weighInDays: 5 } }
 ];
 
 const storage = {
@@ -123,9 +123,51 @@ const helpers = {
 };
 
 function applyTheme(theme) {
+  const resolvedTheme = theme === 'dark' ? 'dark' : 'light';
+
   document.body.classList.remove('theme-light', 'theme-dark');
-  document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
-  localStorage.setItem('preferredTheme', theme === 'dark' ? 'dark' : 'light');
+  document.body.classList.add(`theme-${resolvedTheme}`);
+
+  localStorage.setItem('preferredTheme', resolvedTheme);
+
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) {
+    metaTheme.setAttribute('content', resolvedTheme === 'dark' ? '#09070d' : '#f8f5fd');
+  }
+
+  const button = document.getElementById('themeToggle');
+  if (button) {
+    button.textContent = resolvedTheme === 'dark' ? '☀' : '◐';
+    button.setAttribute('aria-label', resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+}
+
+function installThemeToggle() {
+  const button = document.getElementById('themeToggle');
+  const current = localStorage.getItem('preferredTheme') || 'light';
+
+  applyTheme(current);
+
+  if (!button) return;
+
+  button.onclick = () => {
+    const next = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
+    applyTheme(next);
+  };
+}
+
+function installThemeToggle() {
+  const button = document.getElementById('themeToggle');
+  const current = localStorage.getItem('preferredTheme') || 'light';
+
+  applyTheme(current);
+
+  if (!button) return;
+
+  button.addEventListener('click', () => {
+    const next = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
+    applyTheme(next);
+  });
 }
 
 function installThemeToggle() {
@@ -158,6 +200,27 @@ async function ensureApp() {
 
 function requireProfile() {
   if (!getCurrentProfile()) window.location.href = 'index.html';
+}
+
+let appReadyPromise = null;
+
+async function ensureApp() {
+  if (appReadyPromise) return appReadyPromise;
+
+  appReadyPromise = (async () => {
+    await db.init();
+    installThemeToggle();
+
+    if ('serviceWorker' in navigator) {
+      try {
+        await navigator.serviceWorker.register('./service-worker.js');
+      } catch (error) {
+        console.warn('Service worker registration failed.', error);
+      }
+    }
+  })();
+
+  return appReadyPromise;
 }
 
 window.dailyTracker = { db, helpers, storage, collections, getCurrentProfile, setCurrentProfile, requireProfile, ensureApp, applyTheme };

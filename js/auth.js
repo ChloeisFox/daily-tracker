@@ -1,23 +1,28 @@
-function getAppApi() {
-  return window.dailyTracker || null;
+function waitForAppReady() {
+  return new Promise((resolve) => {
+    const check = () => {
+      if (window.dailyTracker) {
+        resolve(window.dailyTracker);
+      } else {
+        setTimeout(check, 50);
+      }
+    };
+    check();
+  });
 }
 
-function getProfiles() {
-  const api = getAppApi();
-
-  if (!api) return [];
-
+function getProfiles(api) {
   const profiles = api.storage.get('profiles', []);
   return Array.isArray(profiles) ? profiles : [];
 }
 
-function renderProfiles() {
+function renderProfiles(api) {
   const profileList = document.getElementById('profileList');
   const profileSelect = document.getElementById('profileSelect');
 
   if (!profileList || !profileSelect) return;
 
-  const profiles = getProfiles();
+  const profiles = getProfiles(api);
 
   profileList.innerHTML = profiles.map((profile) => `
     <button type="button" class="profile-card" data-id="${profile.id}">
@@ -38,15 +43,12 @@ function renderProfiles() {
   });
 }
 
-function installLogin() {
+function installLogin(api) {
   const form = document.getElementById('loginForm');
   if (!form) return;
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-
-    const api = getAppApi();
-    if (!api) return;
 
     const profileId = document.getElementById('profileSelect')?.value;
     const pin = document.getElementById('pinInput')?.value?.trim();
@@ -74,10 +76,8 @@ function installLogin() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  if (window.dailyTracker?.ensureApp) {
-    await window.dailyTracker.ensureApp();
-  }
-
-  renderProfiles();
-  installLogin();
+  const api = await waitForAppReady();
+  await api.ensureApp();
+  renderProfiles(api);
+  installLogin(api);
 });
