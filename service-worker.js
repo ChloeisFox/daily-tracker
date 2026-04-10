@@ -1,4 +1,4 @@
-const CACHE_NAME = 'daily-tracker-v2'; // <-- bump version when you update app
+const CACHE_NAME = 'daily-tracker-v3';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -20,15 +20,35 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const request = event.request;
+
+  // Only cache normal GET requests
+  if (request.method !== 'GET') {
+    event.respondWith(fetch(request));
+    return;
+  }
+
+  // Skip non-http(s) requests just in case
+  if (!request.url.startsWith('http')) {
+    return;
+  }
+
   event.respondWith(
-    fetch(event.request)
+    fetch(request)
       .then((response) => {
-        const clone = response.clone();
+        // Only cache successful basic/http responses
+        if (!response || response.status !== 200) {
+          return response;
+        }
+
+        const responseToCache = response.clone();
+
         caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, clone);
+          cache.put(request, responseToCache).catch(() => {});
         });
+
         return response;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(request))
   );
 });

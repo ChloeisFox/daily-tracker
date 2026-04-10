@@ -160,8 +160,9 @@ service cloud.firestore {
         "protein",
         "carbs",
         "fat",
-        "notes",
         "ingredients",
+        "ingredientTags",
+        "notes",
         "createdAt",
         "updatedAt"
       ]) &&
@@ -173,8 +174,9 @@ service cloud.firestore {
       isOptionalNumber(request.resource.data.protein) &&
       isOptionalNumber(request.resource.data.carbs) &&
       isOptionalNumber(request.resource.data.fat) &&
-      isOptionalString(request.resource.data.notes) &&
       (!("ingredients" in request.resource.data) || request.resource.data.ingredients is list) &&
+      (!("ingredientTags" in request.resource.data) || request.resource.data.ingredientTags is list) &&
+      isOptionalString(request.resource.data.notes) &&
       isOptionalString(request.resource.data.createdAt) &&
       isOptionalString(request.resource.data.updatedAt);
     }
