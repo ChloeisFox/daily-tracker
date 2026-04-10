@@ -11,16 +11,6 @@ function getIngredientsArray(text) {
     .filter(Boolean);
 }
 
-function getRecipeProfileIds(profileId) {
-  return [profileId, 'shared'];
-}
-
-function getRecipeOwnerLabel(recipe, currentProfileId) {
-  if (recipe.profileId === 'shared') return 'Shared';
-  if (recipe.profileId === currentProfileId) return 'Personal';
-  return recipe.profileId || 'Recipe';
-}
-
 function normalizeIngredientTags(ingredients) {
   return [...new Set(
     (ingredients || [])
@@ -48,41 +38,24 @@ function fillRecipeForm(recipe) {
     ? recipe.ingredients.join('\n')
     : '';
   document.getElementById('recipeNotes').value = recipe.notes || '';
-
-  const visibility = document.getElementById('recipeVisibility');
-  if (visibility) {
-    visibility.value = recipe.profileId === 'shared' ? 'shared' : 'personal';
-  }
 }
 
 function clearRecipeForm() {
   document.getElementById('recipeForm').reset();
   document.getElementById('recipeId').value = '';
-
-  const visibility = document.getElementById('recipeVisibility');
-  if (visibility) {
-    visibility.value = 'shared';
-  }
 }
 
-function recipeCard(recipe, currentProfileId) {
-  const ownerLabel = getRecipeOwnerLabel(recipe, currentProfileId);
-
+function recipeCard(recipe) {
   const macros = [
     recipe.calories ? `${recipe.calories} cal` : null,
     recipe.protein ? `P ${recipe.protein}` : null,
     recipe.carbs ? `C ${recipe.carbs}` : null,
     recipe.fat ? `F ${recipe.fat}` : null
-  ]
-    .filter(Boolean)
-    .join(' • ');
+  ].filter(Boolean).join(' • ');
 
-  const ingredientsPreview =
-    Array.isArray(recipe.ingredients) && recipe.ingredients.length
-      ? `<p class="helper-text">${recipe.ingredients.slice(0, 3).join(' • ')}${
-          recipe.ingredients.length > 3 ? '...' : ''
-        }</p>`
-      : '';
+  const ingredientsPreview = Array.isArray(recipe.ingredients) && recipe.ingredients.length
+    ? `<p class="helper-text">${recipe.ingredients.slice(0, 3).join(' • ')}${recipe.ingredients.length > 3 ? '...' : ''}</p>`
+    : '';
 
   return `
     <div class="list-item">
@@ -93,7 +66,7 @@ function recipeCard(recipe, currentProfileId) {
             ${recipe.category || 'No category'}${recipe.servingSize ? ` • ${recipe.servingSize}` : ''}
           </div>
         </div>
-        <span class="status-pill">${ownerLabel}</span>
+        <span class="status-pill">Shared</span>
       </div>
 
       ${macros ? `<p class="helper-text" style="margin-top:8px;">${macros}</p>` : ''}
@@ -108,21 +81,19 @@ function recipeCard(recipe, currentProfileId) {
   `;
 }
 
-async function getVisibleRecipes() {
-  const profile = app.getCurrentProfile();
+async function getSharedRecipes() {
   const allRecipes = await app.db.list(recipeCollectionName());
 
   return allRecipes
-    .filter((recipe) => getRecipeProfileIds(profile.id).includes(recipe.profileId))
+    .filter((recipe) => recipe.profileId === 'shared')
     .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
 }
 
 async function loadRecipes() {
-  const profile = app.getCurrentProfile();
   const search = document.getElementById('recipeSearch')?.value.trim().toLowerCase() || '';
   const category = document.getElementById('recipeFilterCategory')?.value || '';
 
-  let recipes = await getVisibleRecipes();
+  let recipes = await getSharedRecipes();
 
   if (category) {
     recipes = recipes.filter((recipe) => recipe.category === category);
@@ -154,7 +125,7 @@ async function loadRecipes() {
     return;
   }
 
-  recipeList.innerHTML = recipes.map((recipe) => recipeCard(recipe, profile.id)).join('');
+  recipeList.innerHTML = recipes.map(recipeCard).join('');
 
   recipeList.querySelectorAll('.edit-recipe-button').forEach((button) => {
     button.addEventListener('click', async () => {
@@ -186,14 +157,12 @@ function installRecipeForm() {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const profile = app.getCurrentProfile();
     const existingId = document.getElementById('recipeId').value.trim();
-    const visibility = document.getElementById('recipeVisibility')?.value || 'shared';
     const ingredients = getIngredientsArray(document.getElementById('recipeIngredients').value);
 
     const payload = {
       id: existingId || crypto.randomUUID(),
-      profileId: visibility === 'shared' ? 'shared' : profile.id,
+      profileId: 'shared',
       name: document.getElementById('recipeName').value.trim(),
       category: document.getElementById('recipeCategory').value,
       servingSize: document.getElementById('recipeServingSize').value.trim() || '1 serving',
@@ -211,7 +180,7 @@ function installRecipeForm() {
     await app.db.upsert(recipeCollectionName(), payload.id, payload);
     clearRecipeForm();
     await loadRecipes();
-    alert(existingId ? 'Recipe updated.' : 'Recipe saved.');
+    alert(existingId ? 'Recipe updated.' : 'Recipe saved for both profiles.');
   });
 
   document.getElementById('clearRecipeForm')?.addEventListener('click', clearRecipeForm);
@@ -227,7 +196,6 @@ async function init() {
   app.requireProfile();
   installRecipeForm();
   installFilters();
-  clearRecipeForm();
   await loadRecipes();
 }
 

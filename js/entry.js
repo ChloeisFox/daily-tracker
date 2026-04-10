@@ -56,15 +56,13 @@ async function loadRecipesIntoSelect() {
   const select = document.getElementById('savedRecipeSelect');
   if (!select) return;
 
-  const recipes = await getAvailableRecipes();
+  const recipes = await app.db.list('recipes', { profileId: 'shared' });
 
   select.innerHTML = `
     <option value="">Choose a saved recipe</option>
     ${recipes
-      .map((recipe) => {
-        const sharedLabel = recipe.profileId === 'shared' ? ' (Shared)' : '';
-        return `<option value="${recipe.id}">${recipe.name}${sharedLabel}</option>`;
-      })
+      .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+      .map((recipe) => `<option value="${recipe.id}">${recipe.name}</option>`)
       .join('')}
   `;
 }
@@ -73,7 +71,7 @@ async function applySelectedRecipe() {
   const recipeId = document.getElementById('savedRecipeSelect')?.value;
   if (!recipeId) return;
 
-  const recipes = await getAvailableRecipes();
+  const recipes = await app.db.list('recipes', { profileId: 'shared' });
   const recipe = recipes.find((item) => item.id === recipeId);
   if (!recipe) return;
 
