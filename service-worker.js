@@ -1,4 +1,4 @@
-const CACHE_NAME = 'daily-tracker-v6';
+const CACHE_NAME = 'daily-tracker-v7';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
